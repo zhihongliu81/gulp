@@ -30,7 +30,7 @@ const LoginForm = () => {
       }
     }
 
-   if (!ValidateEmail(email)) errors.push('Email has invalid format');
+   if (!ValidateEmail(email)) errors.push('Email has invalid format. ex:example@email.com');
    setEmailValidationErrors(errors);
   }, [email]);
 
@@ -80,7 +80,7 @@ const LoginForm = () => {
         <form onSubmit={onLogin} className='login-form-form-container'>
           <div>
             {errors.map((error, ind) => (
-              <div style={{ color: 'red' }} key={ind}>{error}</div>
+              <div className='error' key={ind}>{error}</div>
             ))}
           </div>
           <div>
@@ -93,7 +93,7 @@ const LoginForm = () => {
             />
             <>
               {showEmailErrors && emailValidationErrors.map((error, idx) => (
-                <li key={idx} style={{ color: 'red' }}>{error}</li>
+                <li key={idx} className='error'>{error}</li>
               ))}
             </>
           </div>
@@ -107,7 +107,7 @@ const LoginForm = () => {
             />
             <>
               {showPasswordErrors && passwordValidationErrors.map((error, idx) => (
-                <li key={idx} style={{ color: 'red' }}>{error}</li>
+                <li key={idx} className='error'>{error}</li>
               ))}
             </>
           </div>
@@ -122,7 +122,7 @@ const LoginForm = () => {
         </div>
       </div>
       <div className='login-form-right-container'>
-        <img alt='signup_illustration' src='https://s3-media0.fl.yelpcdn.com/assets/2/www/img/7922e77f338d/signup/signup_illustration.png' />
+        <img alt='login_illustration' src='https://s3-media0.fl.yelpcdn.com/assets/2/www/img/7922e77f338d/signup/signup_illustration.png' />
       </div>
 
     </div>

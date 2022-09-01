@@ -63,6 +63,7 @@
     border-radius: 5px;
     font-weight: bold;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .not-ready-to-login {
@@ -85,6 +86,7 @@
     border-radius: 5px;
     font-weight: bold;
     font-size: 20px;
+    cursor: pointer;
 }
 
 .login-form-bottom-link {
@@ -96,11 +98,11 @@
     padding-left: 180px;
     margin-right: 10px;
     color: gray;
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .login-form-bottom-navlink {
     text-decoration: none;
     color: #0073bb;
-    font-size: 10px;
+    font-size: 12px;
 }

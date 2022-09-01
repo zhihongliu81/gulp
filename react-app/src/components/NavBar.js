@@ -42,15 +42,18 @@ const NavBar = () => {
 
   // )
   console.log(currentPath)
+  let sessionLink;
+
   if ( currentPath === '/login' || currentPath === '/sign-up' ) {
-    return (
-      <div>
-        <NavLink to='/' exact={true} activeClassName='active' onClick={() => setCurrentPath(window.location.pathname)}>gulp</NavLink>
-      </div>
+    sessionLink = (
+    <div>
+      <NavLink to='/' exact={true} activeClassName='active' onClick={() => setCurrentPath(window.location.pathname)}>gulp</NavLink>
+    </div>
     )
+
   } else {
     if (user) {
-      return (
+      sessionLink = (
         <div>
           <div>
             <NavLink to='/' exact={true} activeClassName='active' onClick={() => setCurrentPath(window.location.pathname)}>gulp</NavLink>
@@ -60,8 +63,9 @@ const NavBar = () => {
           </div>
         </div>
       )
+
     } else {
-      return (
+      sessionLink = (
         <div>
           <div>
             <NavLink to='/' exact={true} activeClassName='active' onClick={() => setCurrentPath(window.location.pathname)}>gulp</NavLink>
@@ -80,8 +84,15 @@ const NavBar = () => {
       )
 
     }
+
+
   }
 
+  return (
+    <div>
+      {sessionLink}
+    </div>
+  )
 
 
   // return (
