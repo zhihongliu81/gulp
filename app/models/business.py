@@ -33,7 +33,9 @@ class Business(db.Model):
             'country': self.country,
             'phoneNumber': self.phone_number,
             'website': self.website,
-            'minPrice': self.min_price,
-            'maxPrice': self.max_price,
-            'createdAt': self.created_at
+            'minPrice': str(self.min_price),
+            'maxPrice': str(self.max_price),
+            'createdAt': self.created_at,
+            'reviews': [review.to_dict() for review in self.reviews],
+            'images': [image.to_dict() for image in self.images]
         }

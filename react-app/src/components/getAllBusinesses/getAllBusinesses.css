@@ -1,0 +1,44 @@
+.business-list-main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+}
+
+.business-list-container {
+    display: grid;
+    max-width: 1200px;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+    align-content: space-between;
+    justify-content: space-around;
+    /* margin: 10px 200px; */
+    box-sizing: border-box;
+    /* margin-bottom: 30px; */
+}
+
+.business-list-detail-container {
+    display: flex;
+    flex-direction: row;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 8px;
+}
+
+.business-list-image {
+    width: 240px;
+    height: 240px;
+    object-fit: cover;
+}
+
+.business-list-detail-right-container {
+    margin-left: 10px;
+}
+.business-list-name {
+    cursor: pointer;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.business-list-name:hover {
+    text-decoration: underline;
+}

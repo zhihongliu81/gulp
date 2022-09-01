@@ -9,6 +9,8 @@ import ProtectedRoute from './components/auth/ProtectedRoute';
 // import User from './components/User';
 import { authenticate } from './store/session';
 import './App.css'
+import GetAllBusinesses from './components/getAllBusinesses/getAllBusinesses';
+import GetBusinessDetail from './components/getBusinessDetail/getBusinessDetail';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -43,7 +45,15 @@ function App() {
             </Route>
 
             <Route path='/' exact={true} >
-              <h1>My Home Page</h1>
+              <GetAllBusinesses />
+            </Route>
+
+            <Route path={'/businesses/new'} exact={true}>
+
+            </Route>
+
+            <Route path={`/businesses/:businessId`}>
+              <GetBusinessDetail />
             </Route>
 
             <Route>
