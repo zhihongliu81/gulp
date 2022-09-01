@@ -10,7 +10,7 @@ def seed_businesses():
         state = 'TX',
         zipcode = 78702,
         country = 'US',
-        phone_number = 5126531187,
+        phone_number = '5126531187',
         website = 'https://franklinbbq.com',
         min_price = 20,
         max_price = 40
@@ -23,7 +23,7 @@ def seed_businesses():
         state = 'TX',
         zipcode = 78701,
         country = 'US',
-        phone_number = 5122369599,
+        phone_number = '5122369599',
         website = 'http://www.moonshinegrill.com',
         min_price = 15,
         max_price = 35
@@ -36,7 +36,7 @@ def seed_businesses():
         state = 'TX',
         zipcode = 78704,
         country = 'US',
-        phone_number = 5129164808,
+        phone_number = '5129164808',
         website = 'https://uchiaustin.com',
         min_price = 80,
         max_price = 150
@@ -49,7 +49,7 @@ def seed_businesses():
         state = 'TX',
         zipcode = 78751,
         country = 'US',
-        phone_number = 5122158972,
+        phone_number = '5122158972',
         website = 'http://www.mongersaustin.com',
         min_price = 20,
         max_price = 30
@@ -62,7 +62,7 @@ def seed_businesses():
         state = 'TX',
         zipcode = 78704,
         country = 'US',
-        phone_number = 5123635622,
+        phone_number = '5123635622',
         website = 'http://ilikelick.com',
         min_price = 5,
         max_price = 10
@@ -75,7 +75,7 @@ def seed_businesses():
         state = 'TX',
         zipcode = 78703,
         country = 'US',
-        phone_number = 5128865737,
+        phone_number = '5128865737',
         website = 'http://www.amysicecreams.com/',
         min_price = 3,
         max_price = 10
@@ -88,7 +88,7 @@ def seed_businesses():
         state = 'CA',
         zipcode = 94110,
         country = 'US',
-        phone_number = 4156482300,
+        phone_number = '4156482300',
         website = 'https://mitchellsicecream.com',
         min_price = 2,
         max_price = 10
@@ -101,7 +101,7 @@ def seed_businesses():
         state = 'CA',
         zipcode = 94133,
         country = 'US',
-        phone_number = 4159692010,
+        phone_number = '4159692010',
         website = 'https://fogharbor.com',
         min_price = 20,
         max_price = 40
@@ -114,7 +114,7 @@ def seed_businesses():
         state = 'CA',
         zipcode = 94118,
         country = 'US',
-        phone_number = 4156824875,
+        phone_number = '4156824875',
         website = 'http://www.sushiwakosf.com',
         min_price = 90,
         max_price = 200
@@ -127,7 +127,7 @@ def seed_businesses():
         state = 'CA',
         zipcode = 94133,
         country = 'US',
-        phone_number = 4156512574,
+        phone_number = '4156512574',
         website = 'https://crabhouse39.com',
         min_price = 50,
         max_price = 70
@@ -140,7 +140,7 @@ def seed_businesses():
         state = 'CA',
         zipcode = 94110,
         country = 'US',
-        phone_number = 4155502388,
+        phone_number = '4155502388',
         website = 'http://basaseafoodsf.com',
         min_price = 5,
         max_price = 10
@@ -153,7 +153,7 @@ def seed_businesses():
         state = 'NY',
         zipcode = 10022,
         country = 'US',
-        phone_number = 5126531187,
+        phone_number = '5126531187',
         website = 'http://www.crabhouseny.com',
         min_price = 90,
         max_price = 120
@@ -166,7 +166,7 @@ def seed_businesses():
         state = 'NY',
         zipcode = 10002,
         country = 'US',
-        phone_number = 2129258083,
+        phone_number = '2129258083',
         website = 'https://supcrab.com',
         min_price = 50,
         max_price = 70
@@ -179,7 +179,7 @@ def seed_businesses():
         state = 'NY',
         zipcode = 10016,
         country = 'US',
-        phone_number = 6465903575,
+        phone_number = '6465903575',
         website = 'https://www.surrealcreamery.com',
         min_price = 20,
         max_price = 30
@@ -192,7 +192,7 @@ def seed_businesses():
         state = 'NY',
         zipcode = 10013,
         country = 'US',
-        phone_number = 2129662882,
+        phone_number = '2129662882',
         website = 'http://taiyakinyc.com',
         min_price = 5,
         max_price = 10
@@ -205,7 +205,7 @@ def seed_businesses():
         state = 'NY',
         zipcode = 10022,
         country = 'US',
-        phone_number = 2126884190,
+        phone_number = '2126884190',
         website = 'http://www.clubasteakhouse.com/',
         min_price = 50,
         max_price = 75

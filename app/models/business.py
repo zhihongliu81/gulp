@@ -11,7 +11,7 @@ class Business(db.Model):
     state = db.Column(db.String(50), nullable=False)
     zipcode = db.Column(db.Integer)
     country = db.Column(db.String(50))
-    phone_number = db.Column(db.Integer, nullable=False)
+    phone_number = db.Column(db.String(20), nullable=False)
     website = db.Column(db.String(255))
     min_price = db.Column(db.DECIMAL(5, 2))
     max_price = db.Column(db.DECIMAL(5, 2))
