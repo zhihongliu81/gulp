@@ -1,9 +1,11 @@
 
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 
 const NavBar = () => {
+  const user = useSelector(state => state.session.user);
   return (
     <nav>
       <ul>
@@ -12,7 +14,8 @@ const NavBar = () => {
             Home
           </NavLink>
         </li>
-        <li>
+        {!user && <div>
+          <li>
           <NavLink to='/login' exact={true} activeClassName='active'>
             Login
           </NavLink>
@@ -22,14 +25,19 @@ const NavBar = () => {
             Sign Up
           </NavLink>
         </li>
-        <li>
+
+        </div>
+        }
+
+        {/* <li>
           <NavLink to='/users' exact={true} activeClassName='active'>
             Users
           </NavLink>
-        </li>
-        <li>
+        </li> */}
+        {user && <li>
           <LogoutButton />
-        </li>
+        </li>}
+
       </ul>
     </nav>
   );
