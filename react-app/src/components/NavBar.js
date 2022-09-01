@@ -1,46 +1,119 @@
 
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState, useEffect} from 'react';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 
 const NavBar = () => {
   const user = useSelector(state => state.session.user);
-  return (
-    <nav>
-      <ul>
-        <li>
-          <NavLink to='/' exact={true} activeClassName='active'>
-            Home
-          </NavLink>
-        </li>
-        {!user && <div>
-          <li>
-          <NavLink to='/login' exact={true} activeClassName='active'>
+
+
+
+  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+
+  useEffect(() => {
+    setCurrentPath(window.location.pathname)
+
+  }, [user, window.location.pathname])
+
+  // return (
+  //   <div>
+  //     <div>
+  //       <NavLink to='/' exact={true} activeClassName='active'>gulp</NavLink>
+  //     </div>
+  //     {user ? (<div>
+  //           <LogoutButton />
+  //         </div>) : (
+  //           <div>
+  //             <div>
+  //         <NavLink to='/login' exact={true} activeClassName='active'>
+  //           Login
+  //         </NavLink>
+  //         </div>
+  //         <div>
+  //           <NavLink to='/sign-up' exact={true} activeClassName='active'>
+  //           Sign Up
+  //           </NavLink>
+  //         </div>
+
+  //           </div>
+  //         ) }
+  //   </div>
+
+  // )
+  console.log(currentPath)
+  if ( currentPath === '/login' || currentPath === '/sign-up' ) {
+    return (
+      <div>
+        <NavLink to='/' exact={true} activeClassName='active' onClick={() => setCurrentPath(window.location.pathname)}>gulp</NavLink>
+      </div>
+    )
+  } else {
+    if (user) {
+      return (
+        <div>
+          <div>
+            <NavLink to='/' exact={true} activeClassName='active' onClick={() => setCurrentPath(window.location.pathname)}>gulp</NavLink>
+          </div>
+          <div>
+            <LogoutButton />
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <div>
+            <NavLink to='/' exact={true} activeClassName='active' onClick={() => setCurrentPath(window.location.pathname)}>gulp</NavLink>
+          </div>
+          <div>
+          <NavLink to='/login' exact={true} activeClassName='active' onClick={() => setCurrentPath(window.location.pathname)}>
             Login
           </NavLink>
-        </li>
-        <li>
-          <NavLink to='/sign-up' exact={true} activeClassName='active'>
+          </div>
+          <div>
+            <NavLink to='/sign-up' exact={true} activeClassName='active' onClick={() => setCurrentPath(window.location.pathname)}>
             Sign Up
-          </NavLink>
-        </li>
-
+            </NavLink>
+          </div>
         </div>
-        }
+      )
 
-        {/* <li>
-          <NavLink to='/users' exact={true} activeClassName='active'>
-            Users
-          </NavLink>
-        </li> */}
-        {user && <li>
-          <LogoutButton />
-        </li>}
+    }
+  }
 
-      </ul>
-    </nav>
-  );
+
+
+  // return (
+  //   <nav>
+  //     <ul>
+  //       <li>
+  //         <NavLink to='/' exact={true} activeClassName='active'>
+  //           Home
+  //         </NavLink>
+  //       </li>
+  //       {!user && <div>
+  //         <li>
+  //         <NavLink to='/login' exact={true} activeClassName='active'>
+  //           Login
+  //         </NavLink>
+  //       </li>
+  //       <li>
+  //         <NavLink to='/sign-up' exact={true} activeClassName='active'>
+  //           Sign Up
+  //         </NavLink>
+  //       </li>
+
+  //       </div>
+  //       }
+
+  //       {user && <li>
+  //         <LogoutButton />
+  //       </li>}
+
+  //     </ul>
+  //   </nav>
+  // );
 }
 
 export default NavBar;

@@ -177,7 +177,7 @@ const SignUpForm = () => {
           placeholder='Repeat Password'
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <button disabled={!readyToSubmit} className={readyToSubmit ? "signup-form-button" : "not-ready-to-signup"} type='submit'>Sign Up</button>
     </form>
   );
 };

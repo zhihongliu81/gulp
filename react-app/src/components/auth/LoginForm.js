@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
+import './LoginForm.css'
 
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
@@ -69,56 +70,63 @@ const LoginForm = () => {
   }
 
   return (
-    <div>
-      <h2>Log in to Yelp</h2>
-      <div>
-        <p>New to Yelp?</p>
-        <NavLink to='/sign-up'>Sign up</NavLink>
-      </div>
-      <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error, ind) => (
-          <div style={{color: 'red'}} key={ind}>{error}</div>
-        ))}
-      </div>
-      <div>
-        <input
-          name='email'
-          type='text'
-          placeholder='Email, ex:example@email.com'
-          value={email}
-          onChange={e => { setEmail(e.target.value); setShowEmailErrors(true) }}
-        />
-         <>
-          {showEmailErrors && emailValidationErrors.map((error, idx) => (
-            <li key={idx} style={{color: 'red'}}>{error}</li>
-          ))}
-        </>
-      </div>
-      <div>
-        <input
-          name='password'
-          type='password'
-          placeholder='Password'
-          value={password}
-          onChange={(e) => {setPassword(e.target.value); setShowPasswordErrors(true)}}
-        />
-         <>
-          {showPasswordErrors && passwordValidationErrors.map((error, idx) => (
-            <li key={idx} style={{color: 'red'}}>{error}</li>
-          ))}
-        </>
-        <button type='button' onClick={handleDemo}>Demo</button>
-        <button disabled={!readyToSubmit} className={readyToSubmit ?"login-form-button": "not-ready-to-login"} type='submit'>Login</button>
+    <div className='login-form-container'>
+      <div className='login-form-left-container'>
+        <h2>Log in to Yelp</h2>
+        <div className='login-form-signup'>
+          <p>New to Yelp?</p>
+          <NavLink to='/sign-up' className={'login-form-signup-link'}><p>Sign up</p></NavLink>
+        </div>
+        <form onSubmit={onLogin} className='login-form-form-container'>
+          <div>
+            {errors.map((error, ind) => (
+              <div style={{ color: 'red' }} key={ind}>{error}</div>
+            ))}
+          </div>
+          <div>
+            <input
+              name='email'
+              type='text'
+              placeholder='Email, ex:example@email.com'
+              value={email}
+              onChange={e => { setEmail(e.target.value); setShowEmailErrors(true) }}
+            />
+            <>
+              {showEmailErrors && emailValidationErrors.map((error, idx) => (
+                <li key={idx} style={{ color: 'red' }}>{error}</li>
+              ))}
+            </>
+          </div>
+          <div>
+            <input
+              name='password'
+              type='password'
+              placeholder='Password'
+              value={password}
+              onChange={(e) => { setPassword(e.target.value); setShowPasswordErrors(true) }}
+            />
+            <>
+              {showPasswordErrors && passwordValidationErrors.map((error, idx) => (
+                <li key={idx} style={{ color: 'red' }}>{error}</li>
+              ))}
+            </>
+          </div>
 
+          <button disabled={!readyToSubmit} className={readyToSubmit ? "login-form-button" : "not-ready-to-login"} type='submit'>Login</button>
+          <button type='button' onClick={handleDemo} className='login-form-demo'>Demo</button>
+        </form>
+        <div className='login-form-bottom-link'>
+          <p>New to Yelp?</p>
+          <NavLink to='/sign-up' className={'login-form-bottom-navlink'}><p>Sign up</p></NavLink>
+
+        </div>
       </div>
-    </form>
-    <div>
-      <p>New to Yelp?</p>
-      <NavLink to='/sign-up'>Sign up</NavLink>
+      <div className='login-form-right-container'>
+        <img alt='signup_illustration' src='https://s3-media0.fl.yelpcdn.com/assets/2/www/img/7922e77f338d/signup/signup_illustration.png' />
+      </div>
+
     </div>
 
-    </div>
 
   );
 };
