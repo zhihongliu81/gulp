@@ -72,7 +72,7 @@ const SignUpForm = () => {
       errors.push('Repeat password should match the password')
     }
     setRepeatPasswordValidationErrors(errors)
-  }, [repeatPassword])
+  }, [repeatPassword, password])
 
   const onSignUp = async (e) => {
     e.preventDefault();
