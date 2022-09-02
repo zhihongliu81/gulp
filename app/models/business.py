@@ -9,7 +9,7 @@ class Business(db.Model):
     address = db.Column(db.String(255), nullable=False)
     city = db.Column(db.String(50), nullable=False)
     state = db.Column(db.String(50), nullable=False)
-    zipcode = db.Column(db.Integer)
+    zipcode = db.Column(db.String(10))
     country = db.Column(db.String(50))
     phone_number = db.Column(db.String(20), nullable=False)
     website = db.Column(db.String(255))
