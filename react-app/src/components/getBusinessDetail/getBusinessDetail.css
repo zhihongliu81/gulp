@@ -1,0 +1,25 @@
+.business-detail-image-container {
+    display: grid;
+    max-width: 50vw;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    align-content: space-between;
+    justify-content: space-around;
+    /* margin: 10px 200px; */
+    box-sizing: border-box;
+    /* margin-bottom: 30px; */
+}
+
+.business-detail-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.business-detail-review-container {
+    max-width: 50vw;
+    margin: 20px 0;
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 8px;
+
+}

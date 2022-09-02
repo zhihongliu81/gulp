@@ -21,5 +21,6 @@ class Review(db.Model):
             'businessId': self.business_id,
             'content': self.content,
             'rating': self.rating,
-            'createdAt': self.created_at
+            'createdAt': self.created_at,
+            'user': self.user.to_dict()
         }
