@@ -23,6 +23,10 @@ const GetBusinessDetail = () => {
         dispatch(getAllImagesThunk(businessId)).then(() => setImagesIsLoaded(true));
     }, [dispatch])
 
+    if (business) {
+        
+    }
+
 
 
     return (businessIsLoaded && reviewsIsLoaded && imagesIsLoaded &&
