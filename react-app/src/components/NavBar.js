@@ -1,24 +1,21 @@
 
 import React, { useState, useEffect} from 'react';
 import { useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import './NavBar.css'
 
 const NavBar = () => {
   const user = useSelector(state => state.session.user);
-
-
-
-  const [currentPath, setCurrentPath] = useState(window.location.pathname)
-
+  const location = useLocation();
+  const path = location.pathname;
 
   let sessionLink;
 
-  if ( currentPath === '/login' || currentPath === '/sign-up' ) {
+  if ( path === '/login' || path === '/sign-up' ) {
     sessionLink = (
     <div>
-      <NavLink to='/' exact={true} activeClassName='active' onClick={() => setCurrentPath('/')}>gulp</NavLink>
+      <NavLink to='/' exact={true} activeClassName='active' >gulp</NavLink>
     </div>
     )
 
@@ -27,7 +24,7 @@ const NavBar = () => {
       sessionLink = (
         <div className='navbar-main-container'>
           <div>
-            <NavLink to='/' exact={true} activeClassName='active' onClick={() => setCurrentPath('/')}>gulp</NavLink>
+            <NavLink to='/' exact={true} activeClassName='active' >gulp</NavLink>
           </div>
           <div>Search bar</div>
           <div>
@@ -37,12 +34,12 @@ const NavBar = () => {
             {user ? <LogoutButton /> :
             <div className='navbar-login-signup-container'>
                 <div>
-                  <NavLink to='/login' exact={true} activeClassName='active' onClick={() => setCurrentPath('/login')}>
+                  <NavLink to='/login' exact={true} activeClassName='active'>
                     Login
                   </NavLink>
                 </div>
                 <div>
-                  <NavLink to='/sign-up' exact={true} activeClassName='active' onClick={() => setCurrentPath('/sign-up')}>
+                  <NavLink to='/sign-up' exact={true} activeClassName='active'>
                     Sign Up
                   </NavLink>
                 </div>
@@ -62,36 +59,6 @@ const NavBar = () => {
   )
 
 
-  // return (
-  //   <nav>
-  //     <ul>
-  //       <li>
-  //         <NavLink to='/' exact={true} activeClassName='active'>
-  //           Home
-  //         </NavLink>
-  //       </li>
-  //       {!user && <div>
-  //         <li>
-  //         <NavLink to='/login' exact={true} activeClassName='active'>
-  //           Login
-  //         </NavLink>
-  //       </li>
-  //       <li>
-  //         <NavLink to='/sign-up' exact={true} activeClassName='active'>
-  //           Sign Up
-  //         </NavLink>
-  //       </li>
-
-  //       </div>
-  //       }
-
-  //       {user && <li>
-  //         <LogoutButton />
-  //       </li>}
-
-  //     </ul>
-  //   </nav>
-  // );
 }
 
 export default NavBar;
