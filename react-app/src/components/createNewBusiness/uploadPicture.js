@@ -1,14 +1,18 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useHistory } from "react-router-dom";
+import './uploadPicture.css'
 
 
-const UploadPicture = () => {
+const UploadPicture = ({setImages}) => {
     const history = useHistory(); // so that we can redirect after the image upload is successful
     const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
-    const [url, setUrl] = useState('')
+    const [urls, setUrls] = useState([])
 
 
+    useEffect(() => {
+
+    }, [urls.length])
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -25,14 +29,18 @@ const UploadPicture = () => {
         if (res.ok) {
             const data = await res.json();
             setImageLoading(false);
-            setUrl(data.url)
+            const newUrls = [...urls]
+            newUrls.push(data.url)
+            setUrls(newUrls)
+            setImages(newUrls)
             // history.push("/images")
         }
         else {
             setImageLoading(false);
+            const data = await res.json();
             // a real app would probably use more advanced
             // error handling
-            console.log("error");
+            alert(data.errors)
         }
     }
 
@@ -49,11 +57,14 @@ const UploadPicture = () => {
                     accept="image/*"
                     onChange={updateImage}
                 />
-                <button type="submit">Submit</button>
+                <button type="submit">Add Image</button>
                 {(imageLoading) && <p>Loading...</p>}
             </form>
-            <div>
-                <img alt='' src={url}/>
+            <div className="upload-picture-image-container">
+                {urls.map(url =>
+                    <img className="upload-picture-image" key={url} alt='' src={url}/>
+                )}
+
             </div>
         </div>
 

@@ -12,6 +12,7 @@ import './App.css'
 import GetAllBusinesses from './components/getAllBusinesses/getAllBusinesses';
 import GetBusinessDetail from './components/getBusinessDetail/getBusinessDetail';
 import UploadPicture from './components/createNewBusiness/uploadPicture';
+import CreateNewBusiness from './components/createNewBusiness/createNewBusiness';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -50,7 +51,7 @@ function App() {
             </Route>
 
             <Route path={'/businesses/new'} exact={true}>
-              <UploadPicture />
+              <CreateNewBusiness />
             </Route>
 
             <Route path={`/businesses/:businessId`}>

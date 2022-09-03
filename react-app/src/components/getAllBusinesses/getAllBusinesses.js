@@ -30,7 +30,7 @@ const GetAllBusinesses = () => {
             <div className='business-list-container'>
                 {businessList.map(business => (
                     <div key={business.id} className='business-list-detail-container'>
-                        <img className='business-list-image' src={business.images[0].url} />
+                        { business.images.length > 0 && <img className='business-list-image' src={business.images[0].url} />}
                         <div className='business-list-detail-right-container'>
                             <h3 className='business-list-name' onClick={() => {history.push(`/businesses/${business.id}`)}}>{business.name}</h3>
                             <p>Do you recommend this business?</p>
