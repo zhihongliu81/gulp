@@ -99,7 +99,6 @@ def add_images():
 def create_business():
     form = CreateBusinessForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    print('current_user----------------------------------',current_user)
 
     if form.validate_on_submit():
         business = Business(
@@ -128,5 +127,5 @@ def create_business():
             db.session.add(image)
         db.session.commit()
         return business.to_dict()
-    print('form.validate_on_submit()', form.validate_on_submit())
+
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401

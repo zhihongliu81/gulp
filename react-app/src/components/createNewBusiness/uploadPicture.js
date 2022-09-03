@@ -8,13 +8,19 @@ const UploadPicture = ({setImages}) => {
     const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
     const [urls, setUrls] = useState([])
-
+    const [urlsValidationErrors, setUrlsValidationErrors] = useState([]);
+    const [showImagesErrors, setShowImagesErrors] = useState(false);
 
     useEffect(() => {
+        const errors =[];
+        if (urls.length === 0) errors.push("Images are required");
+        setUrlsValidationErrors(errors);
+    }, [urls])
 
-    }, [urls.length])
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setShowImagesErrors(true);
         const formData = new FormData();
         formData.append("image", image);
 
@@ -49,6 +55,13 @@ const UploadPicture = ({setImages}) => {
         setImage(file);
     }
 
+    const handleRemove = (url) => {
+        const newUrls = urls.filter(ele => ele !== url);
+        setUrls(newUrls)
+        setImages(newUrls)
+
+    }
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -60,9 +73,18 @@ const UploadPicture = ({setImages}) => {
                 <button type="submit">Add Image</button>
                 {(imageLoading) && <p>Loading...</p>}
             </form>
+            <>
+                {showImagesErrors && urlsValidationErrors.map((error, idx) => (
+                    <li key={idx} className='error'>{error}</li>
+                ))}
+            </>
             <div className="upload-picture-image-container">
                 {urls.map(url =>
-                    <img className="upload-picture-image" key={url} alt='' src={url}/>
+                <div>
+                    <img className="upload-picture-image" key={url} alt='' src={url} />
+                    <button onClick={() => handleRemove(url)}>Remove</button>
+                </div>
+
                 )}
 
             </div>
