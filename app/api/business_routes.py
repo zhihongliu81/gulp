@@ -172,3 +172,20 @@ def edit_business(business_id):
         return business.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+#delete a business
+@business_routes.route('/<int:business_id>', methods=['DELETE'])
+@login_required
+def delete_business(business_id):
+    print('business_id-------------', business_id)
+    business = Business.query.get(business_id)
+    if not business:
+        return {'errors': ['Business cannot be found']}, 400
+
+    if business.user_id != current_user.id:
+        return {"errors": ['Unauthorized']}, 401
+
+    db.session.delete(business)
+    db.session.commit()
+    return {"message":"Successfully deleted"}

@@ -8,13 +8,12 @@ import BusinessForm from "../createNewBusiness/businessForm";
 const EditBusiness = () => {
     const {businessId} =useParams()
     const business = useSelector(state => state.business[businessId])
-    
+
 
     return (
         <div>
             <h2>Let's edit your business details</h2>
             <div>
-                {console.log('business-------', business)}
                 <BusinessForm action={'edit'} business={business} />
             </div>
 

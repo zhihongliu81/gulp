@@ -2,6 +2,7 @@ const GET_ALL_BUSINESSES = 'business/GET_ALL_BUSINESSES'
 const GET_BUSINESS_DETAIL = 'business/GET_BUSINESS_DETAIL'
 const CREATE_BUSINESS = 'business/CREATE_BUSINESS'
 const EDIT_BUSINESS = 'business/EDIT_BUSINESS'
+const DELETE_BUSINESS = 'business/DELETE_BUSINESS'
 
 const getAllBusinesses = (businesses) => {
     return {
@@ -24,10 +25,17 @@ const createBusiness = (business) => {
     }
 }
 
-const editBusiness =(business) => {
+const editBusiness = (business) => {
     return {
         type: EDIT_BUSINESS,
         business
+    }
+}
+
+const deleteBusiness = (businessId) => {
+    return {
+        type: DELETE_BUSINESS,
+        businessId
     }
 }
 
@@ -75,7 +83,6 @@ export const createBusinessThunk = (newBusiness) => async (dispatch) => {
 }
 
 export const editBusinessThunk = (business) => async dispatch => {
-    console.log("business------------------",business)
     const response = await fetch(`/api/businesses/${business.id}/edit`, {
         method: 'PUT',
         headers: {
@@ -90,6 +97,18 @@ export const editBusinessThunk = (business) => async dispatch => {
     }
     return res
 }
+
+export const deleteBusinessThunk = (businessId) => async dispatch => {
+    const response = await fetch(`/api/businesses/${businessId}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        dispatch(deleteBusiness(businessId))
+      }
+      return response
+}
+
+
 
 
 const initialState = {}
@@ -114,6 +133,11 @@ export default function reducer(state = initialState, action) {
         case EDIT_BUSINESS: {
             newState = {...state}
             newState[action.business.id] = action.business
+            return newState
+        }
+        case DELETE_BUSINESS: {
+            newState = {...state}
+            delete newState[action.businessId]
             return newState
         }
 

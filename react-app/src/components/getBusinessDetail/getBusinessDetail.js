@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
-import { getBusinessDetailThunk } from '../../store/business';
+import { getBusinessDetailThunk, deleteBusinessThunk } from '../../store/business';
 import { getAllReviewsThunk } from '../../store/review';
 import { getAllImagesThunk } from '../../store/image';
 import './getBusinessDetail.css'
@@ -9,6 +9,7 @@ import './getBusinessDetail.css'
 
 const GetBusinessDetail = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const {businessId} = useParams();
     const user = useSelector(state => state.session.user)
     const business = useSelector(state => state.business[businessId]);
@@ -40,6 +41,8 @@ const GetBusinessDetail = () => {
         else {
             priceRange= '$'
         }
+    } else {
+        return null
     }
 
     let averRating = 0;
@@ -61,6 +64,11 @@ const GetBusinessDetail = () => {
         })
     }
 
+    const handleDeleteBusiness = async (e) => {
+        e.preventDefault();
+        dispatch(deleteBusinessThunk(businessId)).then(() => history.push('/'))
+    }
+
 
 
     return (businessIsLoaded && reviewsIsLoaded && imagesIsLoaded &&
@@ -72,7 +80,7 @@ const GetBusinessDetail = () => {
             {user && user.id === business.userId &&
             <div>
                 <NavLink to={`/businesses/${businessId}/edit`}>Edit</NavLink>
-                <button>Delete</button>
+                <button onClick={handleDeleteBusiness}>Delete</button>
             </div>
             }
 
