@@ -140,17 +140,32 @@ const BusinessForm = ({business, action}) => {
     }, [images])
 
 
-    const readyToSubmit = nameValidationErrors.length === 0 &&
-                          addressValidationErrors.length === 0 &&
-                          cityValidationErrors.length === 0 &&
-                          stateValidationErrors.length === 0 &&
-                          zipcodeValidationErrors.length === 0 &&
-                          countryValidationErrors.length === 0 &&
-                          phoneNumberValidationErrors.length === 0 &&
-                          websiteValidationErrors.length === 0 &&
-                          minPriceValidationErrors.length === 0 &&
-                          maxPriceValidationErrors.length === 0 &&
-                          imagesValidationErrors.length === 0
+    let readyToSubmit;
+    if (action === 'create') {
+        readyToSubmit = nameValidationErrors.length === 0 &&
+                        addressValidationErrors.length === 0 &&
+                        cityValidationErrors.length === 0 &&
+                        stateValidationErrors.length === 0 &&
+                        zipcodeValidationErrors.length === 0 &&
+                        countryValidationErrors.length === 0 &&
+                        phoneNumberValidationErrors.length === 0 &&
+                        websiteValidationErrors.length === 0 &&
+                        minPriceValidationErrors.length === 0 &&
+                        maxPriceValidationErrors.length === 0 &&
+                        imagesValidationErrors.length === 0
+    } else {
+        readyToSubmit = nameValidationErrors.length === 0 &&
+                        addressValidationErrors.length === 0 &&
+                        cityValidationErrors.length === 0 &&
+                        stateValidationErrors.length === 0 &&
+                        zipcodeValidationErrors.length === 0 &&
+                        countryValidationErrors.length === 0 &&
+                        phoneNumberValidationErrors.length === 0 &&
+                        websiteValidationErrors.length === 0 &&
+                        minPriceValidationErrors.length === 0 &&
+                        maxPriceValidationErrors.length === 0
+    }
+
 
 
 
@@ -374,7 +389,7 @@ const BusinessForm = ({business, action}) => {
                 <button type="submit">Submit</button>
             </form>
             <div>
-                <UploadPicture setImages={setImages} />
+                <UploadPicture setImages={setImages} action={action} />
 
             </div>
         </div>

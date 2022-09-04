@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import './uploadPicture.css'
 
 
-const UploadPicture = ({setImages}) => {
+const UploadPicture = ({setImages, action}) => {
     const history = useHistory(); // so that we can redirect after the image upload is successful
     const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
@@ -74,7 +74,7 @@ const UploadPicture = ({setImages}) => {
                 {(imageLoading) && <p>Loading...</p>}
             </form>
             <>
-                {showImagesErrors && urlsValidationErrors.map((error, idx) => (
+                {(action === 'create') && showImagesErrors && urlsValidationErrors.map((error, idx) => (
                     <li key={idx} className='error'>{error}</li>
                 ))}
             </>
