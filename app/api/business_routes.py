@@ -1,5 +1,6 @@
 from crypt import methods
 from flask import Blueprint, jsonify, session, request
+from app.forms.review_form import ReviewForm
 from app.models import User, db, Business, Image
 from app.forms import LoginForm
 from app.forms import SignUpForm
@@ -7,6 +8,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.api.AWS_upload import (
     upload_file_to_s3, allowed_file, get_unique_filename)
 from app.forms import CreateBusinessForm
+from app.models.review import Review
 from .auth_routes import validation_errors_to_error_messages
 
 business_routes = Blueprint('business', __name__)
@@ -178,7 +180,6 @@ def edit_business(business_id):
 @business_routes.route('/<int:business_id>', methods=['DELETE'])
 @login_required
 def delete_business(business_id):
-    print('business_id-------------', business_id)
     business = Business.query.get(business_id)
     if not business:
         return {'errors': ['Business cannot be found']}, 400
@@ -187,5 +188,73 @@ def delete_business(business_id):
         return {"errors": ['Unauthorized']}, 401
 
     db.session.delete(business)
+    db.session.commit()
+    return {"message":"Successfully deleted"}
+
+
+#create a review
+@business_routes.route('/<int:business_id>/reviews/new', methods=['POST'])
+@login_required
+def create_review(business_id):
+    business = Business.query.get(business_id)
+    if not business:
+        return {'errors': ['Business cannot be found']}, 400
+
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        review = Review(
+            rating = form.data['rating'],
+            content = form.data['content']
+        )
+        review.user_id = current_user.id
+        review.business_id = business_id
+        db.session.add(review)
+        db.session.commit()
+
+        return review.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+#edit a review
+@business_routes.route('/<int:business_id>/reviews/<int:review_id>', methods=['PUT'])
+@login_required
+def update_review(business_id, review_id):
+    business = Business.query.get(business_id)
+    if not business:
+        return {'errors': ['business can not be found']}, 404
+
+    review = Review.query.get(review_id)
+    if not review:
+        return {'errors': ['review can not be found']}, 404
+
+    if review.user_id != current_user.id:
+        return {"errors": ['Unauthorized']}, 401
+
+    form = ReviewForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        review.rating = form.data['rating']
+        review.content = form.data['content']
+        db.session.commit()
+
+        return review.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+#delete a review
+@business_routes.route('/reviews/<int:review_id>', methods=['DELETE'])
+@login_required
+def delete_review(review_id):
+    review = Review.query.get(review_id)
+    if not review:
+        return {'errors': ['Review cannot be found']}, 400
+
+    if review.user_id != current_user.id:
+        return {"errors": ['Unauthorized']}, 401
+
+    db.session.delete(review)
     db.session.commit()
     return {"message":"Successfully deleted"}
