@@ -1,11 +1,13 @@
 from crypt import methods
 from flask import Blueprint, jsonify, session, request
-from app.models import User, business, db, Business
+from app.models import User, db, Business, Image
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.api.AWS_upload import (
     upload_file_to_s3, allowed_file, get_unique_filename)
+from app.forms import CreateBusinessForm
+from .auth_routes import validation_errors_to_error_messages
 
 business_routes = Blueprint('business', __name__)
 
@@ -95,5 +97,95 @@ def add_images():
 @business_routes.route('/new', methods=['POST'])
 @login_required
 def create_business():
-    
-    return new_business
+    form = CreateBusinessForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        business = Business(
+           name = form.data['name'],
+           address = form.data['address'],
+           city = form.data['city'],
+           state = form.data['state'],
+           zipcode = form.data['zipcode'],
+           country = form.data['country'],
+           phone_number = form.data['phone_number'],
+           website = form.data['website'],
+           min_price = form.data['min_price'],
+           max_price = form.data['max_price'],
+           user_id = current_user.id,
+        )
+        db.session.add(business)
+        db.session.commit()
+
+        images = request.json['images']
+        for ele in images:
+            image = Image(
+                user_id = current_user.id,
+                business_id = business.id,
+                url = ele
+            )
+            db.session.add(image)
+        db.session.commit()
+        return business.to_dict()
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+#edit a business
+@business_routes.route('/<int:business_id>/edit', methods=['PUT'])
+@login_required
+def edit_business(business_id):
+    business = Business.query.get(business_id)
+    if not business:
+        return {'errors': ['business can not be found']},404
+    if business.user_id != current_user.id:
+        return {"errors": ['Unauthorized']}, 401
+
+    form = CreateBusinessForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        business.name = form.data['name']
+        business.address = form.data['address']
+        business.city = form.data['city']
+        business.state = form.data['state']
+        business.zipcode = form.data['zipcode']
+        business.country = form.data['country']
+        business.phone_number = form.data['phone_number']
+        business.website = form.data['website']
+        business.min_price = form.data['min_price']
+        business.max_price = form.data['max_price']
+        business.user_id = current_user.id
+
+        db.session.commit()
+
+        images = request.json['images']
+        for ele in images:
+            image = Image(
+                user_id = current_user.id,
+                business_id = business_id,
+                url = ele
+            )
+            db.session.add(image)
+        db.session.commit()
+
+        return business.to_dict()
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+#delete a business
+@business_routes.route('/<int:business_id>', methods=['DELETE'])
+@login_required
+def delete_business(business_id):
+    print('business_id-------------', business_id)
+    business = Business.query.get(business_id)
+    if not business:
+        return {'errors': ['Business cannot be found']}, 400
+
+    if business.user_id != current_user.id:
+        return {"errors": ['Unauthorized']}, 401
+
+    db.session.delete(business)
+    db.session.commit()
+    return {"message":"Successfully deleted"}

@@ -1,0 +1,18 @@
+.upload-picture-image-container {
+    display: grid;
+    max-width: 30vw;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+    align-content: space-between;
+    justify-content: space-around;
+    /* margin: 10px 200px; */
+    box-sizing: border-box;
+    /* margin-bottom: 30px; */
+    margin-top: 50px;
+}
+
+.upload-picture-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}

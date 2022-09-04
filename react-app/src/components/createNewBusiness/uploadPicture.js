@@ -1,16 +1,26 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { useHistory } from "react-router-dom";
+import './uploadPicture.css'
 
 
-const UploadPicture = () => {
+const UploadPicture = ({setImages, action}) => {
     const history = useHistory(); // so that we can redirect after the image upload is successful
     const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
-    const [url, setUrl] = useState('')
+    const [urls, setUrls] = useState([])
+    const [urlsValidationErrors, setUrlsValidationErrors] = useState([]);
+    const [showImagesErrors, setShowImagesErrors] = useState(false);
+
+    useEffect(() => {
+        const errors =[];
+        if (urls.length === 0) errors.push("Images are required");
+        setUrlsValidationErrors(errors);
+    }, [urls])
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setShowImagesErrors(true);
         const formData = new FormData();
         formData.append("image", image);
 
@@ -25,20 +35,31 @@ const UploadPicture = () => {
         if (res.ok) {
             const data = await res.json();
             setImageLoading(false);
-            setUrl(data.url)
+            const newUrls = [...urls]
+            newUrls.push(data.url)
+            setUrls(newUrls)
+            setImages(newUrls)
             // history.push("/images")
         }
         else {
             setImageLoading(false);
+            const data = await res.json();
             // a real app would probably use more advanced
             // error handling
-            console.log("error");
+            alert(data.errors)
         }
     }
 
     const updateImage = (e) => {
         const file = e.target.files[0];
         setImage(file);
+    }
+
+    const handleRemove = (url) => {
+        const newUrls = urls.filter(ele => ele !== url);
+        setUrls(newUrls)
+        setImages(newUrls)
+
     }
 
     return (
@@ -49,11 +70,23 @@ const UploadPicture = () => {
                     accept="image/*"
                     onChange={updateImage}
                 />
-                <button type="submit">Submit</button>
+                <button type="submit">Add Image</button>
                 {(imageLoading) && <p>Loading...</p>}
             </form>
-            <div>
-                <img alt='' src={url}/>
+            <>
+                {(action === 'create') && showImagesErrors && urlsValidationErrors.map((error, idx) => (
+                    <li key={idx} className='error'>{error}</li>
+                ))}
+            </>
+            <div className="upload-picture-image-container">
+                {urls.map((url) =>
+                <div>
+                    <img className="upload-picture-image" key={url} alt='' src={url} />
+                    <button onClick={() => handleRemove(url)}>Remove</button>
+                </div>
+
+                )}
+
             </div>
         </div>
 
