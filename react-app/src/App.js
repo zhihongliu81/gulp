@@ -54,8 +54,12 @@ function App() {
               <CreateNewBusiness />
             </Route>
 
-            <Route path={`/businesses/:businessId`}>
+            <Route path={`/businesses/:businessId`} exact={true}>
               <GetBusinessDetail />
+            </Route>
+
+            <Route path={`/businesses/:businessId/edit`} exact={true} >
+              <h2>Edit business</h2>
             </Route>
 
             <Route path={'/images'} exact={true}>

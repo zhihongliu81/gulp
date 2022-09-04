@@ -129,3 +129,46 @@ def create_business():
         return business.to_dict()
 
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+#edit a business
+@business_routes.route('/<int:business_id>/edit', methods=['PUT'])
+@login_required
+def edit_business(business_id):
+    business = Business.query.get(business_id)
+    if not business:
+        return {'errors': ['business can not be found']},404
+    if business.user_id != current_user.id:
+        return {"errors": ['Unauthorized']}, 401
+
+    form = CreateBusinessForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        business.name = form.data['name']
+        business.address = form.data['address']
+        business.city = form.data['city']
+        business.state = form.data['state']
+        business.zipcode = form.data['zipcode']
+        business.country = form.data['country']
+        business.phone_number = form.data['phone_number']
+        business.website = form.data['website']
+        business.min_price = form.data['min_price']
+        business.max_price = form.data['max_price']
+        business.user_id = current_user.id
+
+        db.session.commit()
+
+        images = request.json['images']
+        for ele in images:
+            image = Image(
+                user_id = current_user.id,
+                business_id = business_id,
+                url = ele
+            )
+            db.session.add(image)
+        db.session.commit()
+
+        return business.to_dict()
+
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

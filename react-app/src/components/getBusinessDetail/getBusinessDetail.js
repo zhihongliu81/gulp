@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, useParams } from 'react-router-dom';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { getBusinessDetailThunk } from '../../store/business';
 import { getAllReviewsThunk } from '../../store/review';
 import { getAllImagesThunk } from '../../store/image';
@@ -10,6 +10,7 @@ import './getBusinessDetail.css'
 const GetBusinessDetail = () => {
     const dispatch = useDispatch();
     const {businessId} = useParams();
+    const user = useSelector(state => state.session.user)
     const business = useSelector(state => state.business[businessId]);
     const reviews = useSelector(state => state.review);
     const images = useSelector(state => state.image);
@@ -66,7 +67,17 @@ const GetBusinessDetail = () => {
     <div className='business-detail-main-container'>
         <div>
             <h2>{business.name}</h2>
+            <div>
             <p>{priceRange}</p>
+            {user && user.id === business.userId &&
+            <div>
+                <NavLink to={`/businesses/${businessId}/edit`}>Edit</NavLink>
+                <button>Delete</button>
+            </div>
+            }
+
+            </div>
+
             <div>
                 <div>Rating:{averRating}</div>
                 <div>{totalReviews} reviews</div>
