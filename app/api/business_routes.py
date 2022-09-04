@@ -242,3 +242,19 @@ def update_review(business_id, review_id):
 
         return review.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+#delete a review
+@business_routes.route('/reviews/<int:review_id>', methods=['DELETE'])
+@login_required
+def delete_review(review_id):
+    review = Review.query.get(review_id)
+    if not review:
+        return {'errors': ['Review cannot be found']}, 400
+
+    if review.user_id != current_user.id:
+        return {"errors": ['Unauthorized']}, 401
+
+    db.session.delete(review)
+    db.session.commit()
+    return {"message":"Successfully deleted"}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { getBusinessDetailThunk, deleteBusinessThunk } from '../../store/business';
-import { getAllReviewsThunk } from '../../store/review';
+import { getAllReviewsThunk, deleteReviewThunk } from '../../store/review';
 import { getAllImagesThunk } from '../../store/image';
 import './getBusinessDetail.css';
 import { Rating } from 'react-simple-star-rating';
@@ -76,6 +76,10 @@ const GetBusinessDetail = () => {
         dispatch(deleteBusinessThunk(businessId)).then(() => history.push('/'))
     }
 
+    const handleDeleteReview = (reviewId) => {
+        dispatch(deleteReviewThunk(reviewId))
+    }
+
 
 
     return (businessIsLoaded && reviewsIsLoaded && imagesIsLoaded &&
@@ -96,7 +100,7 @@ const GetBusinessDetail = () => {
                 <div>
                     <Rating initialValue={averRating} allowHalfIcon={true} readonly={true} />
                     <div>{totalReviews} reviews</div>
-                    {user && <button onClick={() => {setShowReviewModal(true); setAction('create')}}>Write a Review</button>}
+                    {user && <button onClick={() => { setShowReviewModal(true); setAction('create') }}>Write a Review</button>}
                 </div>
                 <>
                     {showReviewModal &&
@@ -124,7 +128,13 @@ const GetBusinessDetail = () => {
                                     return (
                                         <div className='business-detail-review-container' key={review.id}>
                                             <div>{review.user.firstName}</div>
-                                            { review.userId === user.id && <button onClick={() => {setShowReviewModal(true); setAction('edit'); setReviewId(review.id); setCurrentReview(review)}}>Edit Review</button>}
+                                            {review.userId === user.id &&
+                                                <div>
+                                                    <button onClick={() => { setShowReviewModal(true); setAction('edit'); setReviewId(review.id); setCurrentReview(review) }}>Edit Review</button>
+                                                    <button onClick={() => {handleDeleteReview(review.id)}}>Delete</button>
+                                                </div>
+
+                                            }
                                             <Rating initialValue={review.rating} allowHalfIcon={true} readonly={true} />
                                             <div>Reviewed: {review.createdAt}</div>
                                             <p>{review.content}</p>
