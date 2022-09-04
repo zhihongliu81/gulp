@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import UploadPicture from "./uploadPicture";
-import { createBusinessThunk } from "../../store/business";
+import { createBusinessThunk, editBusinessThunk } from "../../store/business";
 
 
 const BusinessForm = ({business, action}) => {
@@ -172,7 +172,20 @@ const BusinessForm = ({business, action}) => {
         };
 
         if (action === 'create') {
+
             dispatch(createBusinessThunk(newBusiness))
+            .then(
+                (res) => {
+                    if (res.errors) {
+                        setErrors(res.errors)
+                    } else {
+                        history.push(`/businesses/${res.id}`)
+                    }
+                }
+            )
+        } else {
+            newBusiness['id'] = business.id
+            dispatch(editBusinessThunk(newBusiness))
             .then(
                 (res) => {
                     if (res.errors) {

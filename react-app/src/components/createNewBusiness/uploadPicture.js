@@ -79,7 +79,7 @@ const UploadPicture = ({setImages}) => {
                 ))}
             </>
             <div className="upload-picture-image-container">
-                {urls.map(url =>
+                {urls.map((url) =>
                 <div>
                     <img className="upload-picture-image" key={url} alt='' src={url} />
                     <button onClick={() => handleRemove(url)}>Remove</button>

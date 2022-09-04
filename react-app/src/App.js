@@ -11,8 +11,9 @@ import { authenticate } from './store/session';
 import './App.css'
 import GetAllBusinesses from './components/getAllBusinesses/getAllBusinesses';
 import GetBusinessDetail from './components/getBusinessDetail/getBusinessDetail';
-import UploadPicture from './components/createNewBusiness/uploadPicture';
+// import UploadPicture from './components/createNewBusiness/uploadPicture';
 import CreateNewBusiness from './components/createNewBusiness/createNewBusiness';
+import EditBusiness from './components/editBusiness/editBusiness';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -59,7 +60,7 @@ function App() {
             </Route>
 
             <Route path={`/businesses/:businessId/edit`} exact={true} >
-              <h2>Edit business</h2>
+              <EditBusiness />
             </Route>
 
             <Route path={'/images'} exact={true}>

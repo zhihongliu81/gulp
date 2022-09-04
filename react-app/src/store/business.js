@@ -1,6 +1,7 @@
 const GET_ALL_BUSINESSES = 'business/GET_ALL_BUSINESSES'
 const GET_BUSINESS_DETAIL = 'business/GET_BUSINESS_DETAIL'
 const CREATE_BUSINESS = 'business/CREATE_BUSINESS'
+const EDIT_BUSINESS = 'business/EDIT_BUSINESS'
 
 const getAllBusinesses = (businesses) => {
     return {
@@ -19,6 +20,13 @@ const getBusinessDetail = (business) => {
 const createBusiness = (business) => {
     return {
         type: CREATE_BUSINESS,
+        business
+    }
+}
+
+const editBusiness =(business) => {
+    return {
+        type: EDIT_BUSINESS,
         business
     }
 }
@@ -62,10 +70,26 @@ export const createBusinessThunk = (newBusiness) => async (dispatch) => {
     }
 
     const res = await response.json();
-    
+
     return res
 }
 
+export const editBusinessThunk = (business) => async dispatch => {
+    console.log("business------------------",business)
+    const response = await fetch(`/api/businesses/${business.id}/edit`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(business)
+    });
+
+    const res = await response.json()
+    if (response.ok) {
+        dispatch(editBusiness(res));
+    }
+    return res
+}
 
 
 const initialState = {}
@@ -83,6 +107,11 @@ export default function reducer(state = initialState, action) {
             return newState
         }
         case CREATE_BUSINESS: {
+            newState = {...state}
+            newState[action.business.id] = action.business
+            return newState
+        }
+        case EDIT_BUSINESS: {
             newState = {...state}
             newState[action.business.id] = action.business
             return newState
