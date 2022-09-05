@@ -128,7 +128,7 @@ const GetBusinessDetail = () => {
                                     return (
                                         <div className='business-detail-review-container' key={review.id}>
                                             <div>{review.user.firstName}</div>
-                                            {review.userId === user.id &&
+                                            {user&& review.userId === user.id &&
                                                 <div>
                                                     <button onClick={() => { setShowReviewModal(true); setAction('edit'); setReviewId(review.id); setCurrentReview(review) }}>Edit Review</button>
                                                     <button onClick={() => {handleDeleteReview(review.id)}}>Delete</button>
