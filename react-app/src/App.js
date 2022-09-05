@@ -55,6 +55,10 @@ function App() {
               <CreateNewBusiness />
             </Route>
 
+            <Route path={'/businesses/searchresults'} exact={true}>
+              <h2>Search results page</h2>
+            </Route>
+
             <Route path={`/businesses/:businessId`} exact={true}>
               <GetBusinessDetail />
             </Route>
@@ -66,6 +70,8 @@ function App() {
             <Route path={'/images'} exact={true}>
               <h2>Image Loaded successfully!</h2>
             </Route>
+
+
 
             <Route>
               <h1>404: Page not found</h1>

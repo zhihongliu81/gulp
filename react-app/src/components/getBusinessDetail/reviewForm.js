@@ -5,7 +5,7 @@ import { createReviewThunk, updateReviewThunk } from '../../store/review';
 
 export default function ReviewForm({close,businessId, business, reviewId, action, review}) {
     const dispatch = useDispatch();
-    const [rating, setRating] = useState(action === 'create'? 0 :(review.rating * 20)); // initial rating value
+    const [rating, setRating] = useState(action === 'create'? 0 :(review.rating)); // initial rating value
     const [content, setContent] = useState(action === 'create' ? '' : review.content);
     const [errors, setErrors] = useState([]);
 
@@ -81,7 +81,7 @@ export default function ReviewForm({close,businessId, business, reviewId, action
                       <li key={idx} className='error'>{error}</li>
                   ))}
               </ul>
-              <Rating onClick={handleRating} ratingValue={rating} />
+              <Rating onClick={handleRating} ratingValue={rating * 20} />
               <>
                   {showRatingErrors && ratingValidationErrors.map((error, idx) => (
                       <li key={idx} className='error'>{error}</li>

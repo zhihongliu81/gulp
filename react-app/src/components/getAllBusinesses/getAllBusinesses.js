@@ -17,7 +17,7 @@ const GetAllBusinesses = () => {
     }, [dispatch])
 
 
-    let businessList;
+    let businessList=[];
     if (Object.keys(businesses).length > 0) {
         businessList = Object.values(businesses);
     } else {
