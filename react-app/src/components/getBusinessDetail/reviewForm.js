@@ -81,7 +81,7 @@ export default function ReviewForm({close,businessId, business, reviewId, action
                       <li key={idx} className='error'>{error}</li>
                   ))}
               </ul>
-              <Rating onClick={handleRating} ratingValue={rating} allowHover={false}/>
+              <Rating onClick={handleRating} ratingValue={rating} />
               <>
                   {showRatingErrors && ratingValidationErrors.map((error, idx) => (
                       <li key={idx} className='error'>{error}</li>
