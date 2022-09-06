@@ -3,6 +3,7 @@ const GET_BUSINESS_DETAIL = 'business/GET_BUSINESS_DETAIL'
 const CREATE_BUSINESS = 'business/CREATE_BUSINESS'
 const EDIT_BUSINESS = 'business/EDIT_BUSINESS'
 const DELETE_BUSINESS = 'business/DELETE_BUSINESS'
+const SEARCH_BUSINESS = 'business/SEARCH_BUSINESS'
 
 const getAllBusinesses = (businesses) => {
     return {
@@ -36,6 +37,13 @@ const deleteBusiness = (businessId) => {
     return {
         type: DELETE_BUSINESS,
         businessId
+    }
+}
+
+const searchBusiness = (businesses) => {
+    return {
+        type: SEARCH_BUSINESS,
+        businesses
     }
 }
 
@@ -108,6 +116,15 @@ export const deleteBusinessThunk = (businessId) => async dispatch => {
       return response
 }
 
+export const searchBusinessThunk = (url) => async dispatch => {
+    const response = await fetch(`/api/businesses/search?${url}`);
+    const res = await response.json();
+
+    if (response.ok) {
+        dispatch(searchBusiness(res));
+    }
+    return res
+}
 
 
 
@@ -138,6 +155,11 @@ export default function reducer(state = initialState, action) {
         case DELETE_BUSINESS: {
             newState = {...state}
             delete newState[action.businessId]
+            return newState
+        }
+        case SEARCH_BUSINESS: {
+
+            newState = action.businesses
             return newState
         }
 

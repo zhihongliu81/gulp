@@ -10,6 +10,8 @@ from app.api.AWS_upload import (
 from app.forms import CreateBusinessForm
 from app.models.review import Review
 from .auth_routes import validation_errors_to_error_messages
+import json
+from urllib.parse import parse_qs
 
 business_routes = Blueprint('business', __name__)
 
@@ -258,3 +260,25 @@ def delete_review(review_id):
     db.session.delete(review)
     db.session.commit()
     return {"message":"Successfully deleted"}
+
+
+# search businesses
+@business_routes.route('/search')
+def search_business():
+    query_paras = request.query_string.decode("utf-8")
+    query_data= parse_qs(query_paras)
+
+    res ={}
+    businesses = Business.query.filter()
+    if 'name' in query_data:
+        businesses = businesses.filter(Business.name.ilike(f'%{query_data["name"][0]}%'))
+    if 'city' in query_data:
+        businesses = businesses.filter(Business.city.ilike(f'%{query_data["city"][0]}%'))
+    if 'state' in query_data:
+        businesses = businesses.filter(Business.state.ilike(f'%{query_data["state"][0]}%'))
+
+
+    for business in businesses:
+        res[business.id] = business.to_dict()
+
+    return  res

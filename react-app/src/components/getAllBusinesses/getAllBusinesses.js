@@ -17,7 +17,7 @@ const GetAllBusinesses = () => {
     }, [dispatch])
 
 
-    let businessList;
+    let businessList=[];
     if (Object.keys(businesses).length > 0) {
         businessList = Object.values(businesses);
     } else {
@@ -34,7 +34,7 @@ const GetAllBusinesses = () => {
                         <div className='business-list-detail-right-container'>
                             <h3 className='business-list-name' onClick={() => {history.push(`/businesses/${business.id}`)}}>{business.name}</h3>
                             <p>Do you recommend this business?</p>
-                            <div>⭐⭐⭐⭐⭐</div>
+                
                         </div>
                     </div>
                 ))}

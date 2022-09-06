@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 import './NavBar.css'
+import SearchBar from './searchBar/searchBar';
 
 const NavBar = () => {
   const user = useSelector(state => state.session.user);
@@ -14,7 +15,7 @@ const NavBar = () => {
 
   if ( path === '/login' || path === '/sign-up' ) {
     sessionLink = (
-    <div>
+    <div className='navbar-main-container'>
       <NavLink to='/' exact={true} activeClassName='active' >gulp</NavLink>
     </div>
     )
@@ -26,7 +27,9 @@ const NavBar = () => {
           <div>
             <NavLink to='/' exact={true} activeClassName='active' >gulp</NavLink>
           </div>
-          <div>Search bar</div>
+          <div>
+            <SearchBar />
+          </div>
           <div>
             <NavLink to='/businesses/new' exact={true} activeClassName='active'>Add a Business</NavLink>
           </div>
@@ -53,9 +56,10 @@ const NavBar = () => {
   }
 
   return (
-    <div>
+    <div className='navbar-sessionLink-container'>
       {sessionLink}
     </div>
+
   )
 
 

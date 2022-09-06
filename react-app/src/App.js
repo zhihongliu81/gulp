@@ -14,6 +14,7 @@ import GetBusinessDetail from './components/getBusinessDetail/getBusinessDetail'
 // import UploadPicture from './components/createNewBusiness/uploadPicture';
 import CreateNewBusiness from './components/createNewBusiness/createNewBusiness';
 import EditBusiness from './components/editBusiness/editBusiness';
+import SearchResults from './components/searchResults/searchResults';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -33,9 +34,9 @@ function App() {
   return (
     <BrowserRouter>
     <div className='app-main-container'>
-      <div>
+
       <NavBar />
-      </div>
+      
       <div className='middle-section-container'>
           <Switch>
 
@@ -55,6 +56,10 @@ function App() {
               <CreateNewBusiness />
             </Route>
 
+            <Route path={'/businesses/searchresults'} exact={true}>
+              <SearchResults />
+            </Route>
+
             <Route path={`/businesses/:businessId`} exact={true}>
               <GetBusinessDetail />
             </Route>
@@ -66,6 +71,8 @@ function App() {
             <Route path={'/images'} exact={true}>
               <h2>Image Loaded successfully!</h2>
             </Route>
+
+
 
             <Route>
               <h1>404: Page not found</h1>

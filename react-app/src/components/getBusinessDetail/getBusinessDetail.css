@@ -10,9 +10,13 @@
     /* margin-bottom: 30px; */
 }
 
+.business-detail-image-container > div {
+    width: 16vw;
+    height: 16vw;
+}
 .business-detail-image {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 

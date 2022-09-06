@@ -1,0 +1,17 @@
+/* .review-form-rating {
+
+
+
+} */
+
+.review-form-rating-container {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.review-form-rating-image {
+    width: 30px;
+    height: 30px;
+    margin: 3px 3px;
+}

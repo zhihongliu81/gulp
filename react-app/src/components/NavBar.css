@@ -1,7 +1,12 @@
+.navbar-sessionLink-container {
+    width: 100%;
+}
+
 .navbar-main-container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    width: 100%;
     font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
 }
 
