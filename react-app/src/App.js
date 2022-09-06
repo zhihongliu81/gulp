@@ -14,6 +14,7 @@ import GetBusinessDetail from './components/getBusinessDetail/getBusinessDetail'
 // import UploadPicture from './components/createNewBusiness/uploadPicture';
 import CreateNewBusiness from './components/createNewBusiness/createNewBusiness';
 import EditBusiness from './components/editBusiness/editBusiness';
+import SearchResults from './components/searchResults/searchResults';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -56,7 +57,7 @@ function App() {
             </Route>
 
             <Route path={'/businesses/searchresults'} exact={true}>
-              <h2>Search results page</h2>
+              <SearchResults />
             </Route>
 
             <Route path={`/businesses/:businessId`} exact={true}>
