@@ -11,6 +11,8 @@ import './getBusinessDetail.css';
 import { Rating } from 'react-simple-star-rating';
 import ReviewForm from './reviewForm';
 import { Modal } from '../../context/Modal';
+import ratingStarFilled from '../../images/rating-star-filled-1.png';
+import ratingStarEmpty from '../../images/rating-star-empty-1.png';
 
 
 const GetBusinessDetail = () => {
@@ -83,6 +85,15 @@ const GetBusinessDetail = () => {
         dispatch(deleteReviewThunk(reviewId))
     }
 
+    const timeFormated = (time) => {
+        const createdDate = new Date(time)
+        const date = createdDate.getDate();
+        const month = createdDate.getMonth() + 1;
+        const year = createdDate.getFullYear();
+
+        return `${month}/${date}/${year}`
+    }
+
 
 
     return (businessIsLoaded && reviewsIsLoaded && imagesIsLoaded &&
@@ -101,7 +112,17 @@ const GetBusinessDetail = () => {
                 </div>
 
                 <div>
-                    <Rating initialValue={averRating} allowHalfIcon={true} readonly={true} />
+                    {/* <Rating initialValue={averRating} allowHalfIcon={true} readonly={true} /> */}
+                    <div className='review-form-rating-container'>
+                        {[1, 2, 3, 4, 5].map(ele => {
+                            return (
+                                <div key={ele} >
+                                    {averRating >= ele ? <img className='review-form-rating-image' alt='' src={ratingStarFilled} /> : <img className='review-form-rating-image' alt='' src={ratingStarEmpty} />}
+                                </div>
+                            )
+                        })}
+                        <p>{averRating}</p>
+                    </div>
                     <div>{totalReviews} reviews</div>
                     {user && <button onClick={() => { setShowReviewModal(true); setAction('create') }}>Write a Review</button>}
                 </div>
@@ -120,7 +141,10 @@ const GetBusinessDetail = () => {
                         <div className='business-detail-image-container'>
                             {imageList.map(url => {
                                 return (
-                                    <img className='business-detail-image' key={url} alt='' src={url} />
+                                    <div>
+                                        <img className='business-detail-image' key={url} alt='' src={url} />
+                                    </div>
+
                                 )
                             })}
                         </div>
@@ -138,8 +162,20 @@ const GetBusinessDetail = () => {
                                                 </div>
 
                                             }
-                                            <Rating initialValue={review.rating} allowHalfIcon={true} readonly={true} />
-                                            <div>Reviewed: {review.createdAt}</div>
+                                            {/* <Rating initialValue={review.rating} allowHalfIcon={true} readonly={true} /> */}
+                                            <div className='review-form-rating-container'>
+                        {[1, 2, 3, 4, 5].map(ele => {
+                            return (
+                                <div key={ele} >
+                                    {review.rating >= ele ? <img className='review-form-rating-image' alt='' src={ratingStarFilled} /> : <img className='review-form-rating-image' alt='' src={ratingStarEmpty} />}
+                                </div>
+
+                            )
+                        })}
+
+                    </div>
+
+                                            <div>Reviewed: {timeFormated(review.createdAt)}</div>
                                             <p>{review.content}</p>
                                         </div>
                                     )

@@ -34,9 +34,9 @@ function App() {
   return (
     <BrowserRouter>
     <div className='app-main-container'>
-      <div>
+
       <NavBar />
-      </div>
+      
       <div className='middle-section-container'>
           <Switch>
 

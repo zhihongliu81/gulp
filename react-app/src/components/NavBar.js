@@ -15,7 +15,7 @@ const NavBar = () => {
 
   if ( path === '/login' || path === '/sign-up' ) {
     sessionLink = (
-    <div>
+    <div className='navbar-main-container'>
       <NavLink to='/' exact={true} activeClassName='active' >gulp</NavLink>
     </div>
     )
@@ -56,9 +56,10 @@ const NavBar = () => {
   }
 
   return (
-    <div>
+    <div className='navbar-sessionLink-container'>
       {sessionLink}
     </div>
+
   )
 
 

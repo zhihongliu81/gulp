@@ -271,11 +271,11 @@ def search_business():
     res ={}
     businesses = Business.query.filter()
     if 'name' in query_data:
-        businesses = businesses.filter(Business.name.ilike(query_data["name"][0]))
+        businesses = businesses.filter(Business.name.ilike(f'%{query_data["name"][0]}%'))
     if 'city' in query_data:
-        businesses = businesses.filter(Business.city.ilike(query_data["city"][0]))
+        businesses = businesses.filter(Business.city.ilike(f'%{query_data["city"][0]}%'))
     if 'state' in query_data:
-        businesses = businesses.filter(Business.state.ilike(query_data['state'][0]))
+        businesses = businesses.filter(Business.state.ilike(f'%{query_data["state"][0]}%'))
 
 
     for business in businesses:
