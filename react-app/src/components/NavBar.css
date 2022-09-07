@@ -51,6 +51,7 @@
 
 .navbar-login,
 .navbar-signup {
+    cursor: pointer;
     text-decoration: none;
     font-size: 30px;
     font-weight: 600;
@@ -76,6 +77,7 @@
 }
 
 .navbar-logout {
+    cursor: pointer;
     background-color: #D32323;
     font-size: 20px;
     font-weight: 600;
