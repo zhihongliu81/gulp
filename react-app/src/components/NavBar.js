@@ -16,7 +16,7 @@ const NavBar = () => {
   if ( path === '/login' || path === '/sign-up' ) {
     sessionLink = (
     <div className='navbar-main-container-1'>
-      <NavLink className={'navbar-homelink'} to='/' exact={true} activeClassName='active' >gulp</NavLink>
+      <NavLink className={'navbar-homelink-1'} to='/' exact={true} activeClassName='active' >gulp</NavLink>
     </div>
     )
 
@@ -34,21 +34,24 @@ const NavBar = () => {
 
             <div>
               {user ?
-                <div>
+                <div className='navbar-add-business-logout-container'>
                   <div>
-                    <NavLink to='/businesses/new' exact={true} activeClassName='active'>Add a Business</NavLink>
-                  </div>
-                  <LogoutButton />
+                    <NavLink className={'navbar-add-business'} to='/businesses/new' exact={true} activeClassName='active'>Add a Business</NavLink>
+                  </div >
+                  
+                    < LogoutButton  />
+
+
                 </div>
                 :
                 <div className='navbar-login-signup-container'>
                   <div>
-                    <NavLink to='/login' exact={true} activeClassName='active'>
+                    <NavLink className='navbar-login' to='/login' exact={true} activeClassName='active'>
                       Login
                     </NavLink>
                   </div>
                   <div>
-                    <NavLink to='/sign-up' exact={true} activeClassName='active'>
+                    <NavLink className={'navbar-signup'} to='/sign-up' exact={true} activeClassName='active'>
                       Sign Up
                     </NavLink>
                   </div>
