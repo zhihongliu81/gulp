@@ -81,9 +81,9 @@ export default function ReviewForm({close,businessId, business, reviewId, action
     }
 
   return (
-      <div className='App'>
+      <div className='review-form-container'>
           {head}
-          <form onSubmit={handleSubmit}>
+          <form className='review-form' onSubmit={handleSubmit}>
               <ul>
                   {errors.map((error, idx) => (
                       <li key={idx} className='error'>{error}</li>
@@ -91,14 +91,14 @@ export default function ReviewForm({close,businessId, business, reviewId, action
               </ul>
               {/* <Rating onClick={handleRating} ratingValue={rating * 20} /> */}
               <div className='review-form-rating-container'>
-                {[1, 2, 3, 4, 5].map(ele => {
-                    return (
-                        <div key={ele} onClick={() => setRating(ele)}>
-                            {rating >= ele ? <img className='review-form-rating-image' alt='' src={ratingStarFilled}/> :<img className='review-form-rating-image' alt='' src={ratingStarEmpty} />}
-                        </div>
+                  {[1, 2, 3, 4, 5].map(ele => {
+                      return (
+                          <div key={ele} onClick={() => setRating(ele)}>
+                              {rating >= ele ? <img className='review-form-rating-image' alt='' src={ratingStarFilled} /> : <img className='review-form-rating-image' alt='' src={ratingStarEmpty} />}
+                          </div>
 
-                    )
-                })}
+                      )
+                  })}
 
               </div>
               <>
@@ -106,19 +106,22 @@ export default function ReviewForm({close,businessId, business, reviewId, action
                       <li key={idx} className='error'>{error}</li>
                   ))}
               </>
-              <input
-                  type={'textarea'}
+              <textarea
                   value={content}
-                  placeholder="Add comment......"
-                  onChange={e => {setContent(e.target.value); setShowContentErrors(true)}}
+                  placeholder="Add comment......2000 characters or less"
+                  rows='5'
+                  cols='50'
+                  onChange={e => { setContent(e.target.value); setShowContentErrors(true) }}
               />
               <>
                   {showContentErrors && contentValidationErrors.map((error, idx) => (
                       <li key={idx} className='error'>{error}</li>
                   ))}
               </>
-              <button type='submit'>POST</button>
-              <button type='button' onClick={close}>Cancle</button>
+              <div>
+                  <button type='submit'>POST</button>
+                  <button type='button' onClick={close}>Cancle</button>
+              </div>
           </form>
       </div>
   )

@@ -158,26 +158,26 @@ const GetBusinessDetail = () => {
 
                                 </div>
 
-                                <div>
+                                <div className='business-detail-review-section'>
                                     <h3>Reviews</h3>
                                     <div>
                                         {reviewList.map(review => {
                                             return (
                                                 <div className='business-detail-review-container' key={review.id}>
-                                                    <div>{review.user.firstName}</div>
+                                                    <div className='business-detail-review-name'>{review.user.firstName}</div>
                                                     {user && review.userId === user.id &&
-                                                        <div>
-                                                            <button onClick={() => { setShowReviewModal(true); setAction('edit'); setReviewId(review.id); setCurrentReview(review) }}>Edit Review</button>
-                                                            <button onClick={() => { handleDeleteReview(review.id) }}>Delete</button>
+                                                        <div className='business-detail-review-buttons'>
+                                                            <button className='business-detail-review-edit-button' onClick={() => { setShowReviewModal(true); setAction('edit'); setReviewId(review.id); setCurrentReview(review) }}>Edit Review</button>
+                                                            <button className='business-detail-review-delete-button' onClick={() => { handleDeleteReview(review.id) }}>Delete</button>
                                                         </div>
 
                                                     }
                                                     {/* <Rating initialValue={review.rating} allowHalfIcon={true} readonly={true} /> */}
-                                                    <div className='review-form-rating-container'>
+                                                    <div className='business-detail-review-rating-container'>
                                                         {[1, 2, 3, 4, 5].map(ele => {
                                                             return (
                                                                 <div key={ele} >
-                                                                    {review.rating >= ele ? <img className='review-form-rating-image' alt='' src={ratingStarFilled} /> : <img className='review-form-rating-image' alt='' src={ratingStarEmpty} />}
+                                                                    {review.rating >= ele ? <img className='business-detail-review-rating-image' alt='' src={ratingStarFilled} /> : <img className='business-detail-review-rating-image' alt='' src={ratingStarEmpty} />}
                                                                 </div>
 
                                                             )
@@ -185,8 +185,8 @@ const GetBusinessDetail = () => {
 
                                                     </div>
 
-                                                    <div>Reviewed: {timeFormated(review.createdAt)}</div>
-                                                    <p>{review.content}</p>
+                                                    <div className='business-detail-review-time'>Reviewed: {timeFormated(review.createdAt)}</div>
+                                                    <p className='business-detail-review-content'>{review.content}</p>
                                                 </div>
                                             )
                                         })

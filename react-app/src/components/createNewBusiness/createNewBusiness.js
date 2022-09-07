@@ -11,13 +11,12 @@ const CreateNewBusiness = () => {
 
 
     return (
-        <div>
+        <div className="create-edit-business-form-container">
             <h2>Let's start with your business details</h2>
             <p>We'll use this information to help you create your business page on Gulp</p>
             <div>
                 <BusinessForm action={'create'} />
             </div>
-
         </div>
     )
 }

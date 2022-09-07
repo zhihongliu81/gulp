@@ -64,13 +64,15 @@ const UploadPicture = ({setImages, action}) => {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form className="upload-picture-form" onSubmit={handleSubmit}>
                 <input
+                    id='file-upload'
                     type="file"
                     accept="image/*"
                     onChange={updateImage}
                 />
-                <button type="submit">Add Image</button>
+
+                <button className="upload-picture-button" type="submit">Add Image</button>
                 {(imageLoading) && <p>Loading...</p>}
             </form>
             <>
@@ -82,7 +84,7 @@ const UploadPicture = ({setImages, action}) => {
                 {urls.map((url) =>
                 <div>
                     <img className="upload-picture-image" key={url} alt='' src={url} />
-                    <button onClick={() => handleRemove(url)}>Remove</button>
+                    <button className="upload-picture-button" onClick={() => handleRemove(url)}>Remove</button>
                 </div>
 
                 )}

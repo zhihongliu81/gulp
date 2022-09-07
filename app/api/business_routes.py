@@ -71,12 +71,12 @@ def get_all_images(business_id):
 @login_required
 def add_images():
     if "image" not in request.files:
-        return {"errors": "image required"}, 400
+        return {"errors": ["image required"]}, 400
 
     image = request.files["image"]
 
     if not allowed_file(image.filename):
-        return {"errors": "file type not permitted"}, 400
+        return {"errors": ["file type not permitted"]}, 400
 
     image.filename = get_unique_filename(image.filename)
 
@@ -122,6 +122,8 @@ def create_business():
         db.session.commit()
 
         images = request.json['images']
+        if len(images) == 0 :
+            return {"errors": ["At least one image required"]}, 400
         for ele in images:
             image = Image(
                 user_id = current_user.id,
@@ -132,7 +134,7 @@ def create_business():
         db.session.commit()
         return business.to_dict()
 
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 #edit a business
@@ -175,7 +177,7 @@ def edit_business(business_id):
 
         return business.to_dict()
 
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 #delete a business
@@ -216,7 +218,7 @@ def create_review(business_id):
         db.session.commit()
 
         return review.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 #edit a review
@@ -243,7 +245,7 @@ def update_review(business_id, review_id):
         db.session.commit()
 
         return review.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
 #delete a review

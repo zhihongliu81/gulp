@@ -144,14 +144,77 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 8px;
+}
+
+.business-detail-review-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 2px solid rgba(128, 128, 128, 0.2);
+}
+
+.business-detail-review-section >h3 {
+    font-size: 30px;
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    font-weight: 600;
 }
 
 .business-detail-review-container {
-    max-width: 50vw;
+    width: 50vw;
     margin: 20px 0;
-    border: 1px solid rgba(128, 128, 128, 0.3);
-    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
 
+
+
+}
+
+.business-detail-review-name {
+    font-size: 24px;
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.business-detail-review-buttons {
+    margin: 5px 0;
+}
+
+.business-detail-review-edit-button,
+.business-detail-review-delete-button {
+    font-size: 16px;
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    font-weight: 600;
+    color: white;
+    background-color: orange;
+    border: 1px solid orange;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.business-detail-review-rating-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.business-detail-review-rating-image {
+    width: 20px;
+    height: 20px;
+    margin-right: 3px;
+}
+
+.business-detail-review-time {
+    font-size: 16px;
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    margin-top: 5px;
+}
+
+.business-detail-review-content {
+    font-size: 14px;
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    margin-top: 5px;
 }
 
 .business-detail-info-right-container {

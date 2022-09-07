@@ -16,3 +16,35 @@
     height: 200px;
     object-fit: cover;
 }
+
+.upload-picture-button {
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    font-weight: 600;
+    color: white;
+    background-color: orange;
+    border: 1px solid orange;
+    border-radius: 5px;
+    padding: 0.5em;
+}
+
+
+#file-upload::file-selector-button {
+    font-size: 16px;
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    font-weight: bold;
+    background-color: orange;
+    border: 1px solid orange;
+    color: white;
+    padding: 0.5em;
+    border: thin solid grey;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#file-upload {
+    margin-right: 20px;
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    cursor: pointer;
+}

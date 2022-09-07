@@ -11,7 +11,7 @@ const EditBusiness = () => {
 
 
     return (
-        <div>
+        <div className="create-edit-business-form-container">
             <h2>Let's edit your business details</h2>
             <div>
                 <BusinessForm action={'edit'} business={business} />

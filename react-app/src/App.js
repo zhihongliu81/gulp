@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Switch } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
@@ -36,7 +36,7 @@ function App() {
     <div className='app-main-container'>
 
       <NavBar />
-      
+
       <div className='middle-section-container'>
           <Switch>
 
@@ -79,8 +79,16 @@ function App() {
             </Route>
           </Switch>
         </div>
-        <div>
-          <p>for footer</p>
+        <div className='app-footer-container'>
+          <a href={'https://github.com/zhihongliu81/gulp'} target="_blank">GitHub Repository | gulp</a>
+          <p>AWS</p>
+          <p>Python</p>
+          <p>React</p>
+          <p>Redux</p>
+          <p>SQLAlchemy</p>
+          <p>Flask</p>
+          <p>PostgreSQL</p>
+          <p>Docker</p>
         </div>
 
 
