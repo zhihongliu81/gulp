@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import UploadPicture from "./uploadPicture";
 import { createBusinessThunk, editBusinessThunk } from "../../store/business";
+import './businessForm.css'
 
 
 const BusinessForm = ({business, action}) => {
@@ -223,14 +224,14 @@ const BusinessForm = ({business, action}) => {
     'VT','VI','VA','WA','WV','WI','WY']
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="business-form-container">
+            <form className="business-form" onSubmit={handleSubmit}>
                 <ul>
                     {errors.map((error, idx) => (
                         <li key={idx} className='error'>{error}</li>
                     ))}
                 </ul>
-                <div>
+                <div className="business-form-input">
                     <label>Name</label>
                     <input
                         type="text"
@@ -245,7 +246,7 @@ const BusinessForm = ({business, action}) => {
                         ))}
                     </>
                 </div>
-                <div>
+                <div className="business-form-input">
                     <label>Address</label>
                     <input
                         type="text"
@@ -260,7 +261,7 @@ const BusinessForm = ({business, action}) => {
                         ))}
                     </>
                 </div>
-                <div>
+                <div className="business-form-input">
                     <label>City</label>
                     <input
                         type="text"
@@ -275,7 +276,7 @@ const BusinessForm = ({business, action}) => {
                         ))}
                     </>
                 </div>
-                <div>
+                <div className="business-form-input">
                     <label>State</label>
                     <select
                         onChange={e => { setState(e.target.value); setShowStateErrors(true) }}
@@ -294,7 +295,7 @@ const BusinessForm = ({business, action}) => {
                         ))}
                     </>
                 </div>
-                <div>
+                <div className="business-form-input">
                     <label>Zipcode</label>
                     <input
                         type="text"
@@ -309,7 +310,7 @@ const BusinessForm = ({business, action}) => {
                         ))}
                     </>
                 </div>
-                <div>
+                <div className="business-form-input">
                     <label>Country</label>
                     <select
                         onChange={e => { setCountry(e.target.value); setShowCountryErrors(true) }}
@@ -326,7 +327,7 @@ const BusinessForm = ({business, action}) => {
                         ))}
                     </>
                 </div>
-                <div>
+                <div className="business-form-input">
                     <label>Phone Number</label>
                     <input
                         type="text"
@@ -341,7 +342,7 @@ const BusinessForm = ({business, action}) => {
                         ))}
                     </>
                 </div>
-                <div>
+                <div className="business-form-input">
                     <label>Website</label>
                     <input
                         type="text"
@@ -356,7 +357,7 @@ const BusinessForm = ({business, action}) => {
                         ))}
                     </>
                 </div>
-                <div>
+                <div className="business-form-input">
                     <label>Minimum Price</label>
                     <input
                         type="number"
@@ -371,7 +372,7 @@ const BusinessForm = ({business, action}) => {
                         ))}
                     </>
                 </div>
-                <div>
+                <div className="business-form-input">
                     <label>Maximum Price</label>
                     <input
                         type="number"
@@ -386,11 +387,11 @@ const BusinessForm = ({business, action}) => {
                         ))}
                     </>
                 </div>
-                <button type="submit">Submit</button>
+                <button className="business-form-submit-button" type="submit">Submit</button>
             </form>
-            <div>
+            <div className="business-form-upload-image">
+                <h3>Upload images: only .png, .jpg, .jpeg, and .gif accepted. </h3>
                 <UploadPicture setImages={setImages} action={action} />
-
             </div>
         </div>
     )

@@ -5,6 +5,18 @@
     font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
 }
 
+.business-list-splash-image {
+    width: 100vw;
+    height: 40vh;
+    object-fit: cover;
+}
+
+.business-list-main-container >h2 {
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    font-size: 30px;
+    margin: 50px auto;
+}
+
 .business-list-container {
     display: grid;
     max-width: 1200px;
@@ -41,4 +53,10 @@
 
 .business-list-name:hover {
     text-decoration: underline;
+}
+
+.business-list-detail-right-container > p {
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    font-size: 20px;
+    color: gray;
 }
