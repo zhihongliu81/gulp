@@ -29,6 +29,7 @@ const SignUpForm = () => {
     const errors = [];
     setErrors([]);
     if (!firstName.length) errors.push('First name is required');
+    if (firstName.length > 50) errors.push("First name must be 50 characters or less");
     setFirstNameValidationErrors(errors);
   }, [firstName]);
 
@@ -36,6 +37,7 @@ const SignUpForm = () => {
     const errors = [];
     setErrors([]);
     if (!lastName.length) errors.push('Last name is required');
+    if (lastName.length > 50) errors.push("Last name must be 50 characters or less");
     setLastNameValidationErrors(errors);
   }, [lastName]);
 
@@ -43,6 +45,7 @@ const SignUpForm = () => {
     const errors = [];
     setErrors([]);
     if (!email.length) errors.push('email is required');
+    if (email.length > 255) errors.push("Email must be 255 characters or less")
 
     function ValidateEmail(email) {
       var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;

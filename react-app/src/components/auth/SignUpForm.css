@@ -38,7 +38,7 @@
 }
 
 .signup-form-input-first-name {
-    width: 136px;
+    width: 235px;
     /* width: 50%; */
     height: 30px;
     margin-right: 10px;
@@ -48,7 +48,7 @@
 }
 
 .signup-form-input-last-name {
-    width: 136px;
+    width: 235px;
     /* width: 50%; */
     height: 30px;
     margin-left: 10px;
@@ -60,7 +60,7 @@
 .signup-form-input-email,
 .signup-form-input-password,
 .signup-form-input-repeat-password {
-    width: 300px;
+    width: 500px;
     height: 30px;
     margin-bottom: 10px;
     border-radius: 5px;

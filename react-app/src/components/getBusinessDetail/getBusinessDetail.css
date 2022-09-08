@@ -220,7 +220,7 @@
 .business-detail-info-right-container {
     position: fixed;
     top: 40vh;
-    right: 6vw;
+    right: 5vw;
     border: 2px solid rgba(128, 128, 128, 0.2);
     padding: 20px;
     border-radius: 8px;
@@ -229,6 +229,8 @@
 
 .business-detail-info-right-container > div {
     border-bottom: 2px solid rgba(128, 128, 128, 0.2);
+    width: 16.5vw;
+    overflow: auto;
 }
 
 .business-detail-info-right-container h3 {
@@ -240,5 +242,6 @@
     font-size: 16px;
     font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
     color: green;
+
 
 }
