@@ -114,7 +114,8 @@ const BusinessForm = ({business, action}) => {
         setErrors([]);
         const errors =[];
         if (website.length === 0) errors.push("Website is required");
-        if (!(website.includes('http://')) && !(website.includes('https://'))) errors.push('Website must include http:// or https://')
+        if (!(website.includes('http://')) && !(website.includes('https://'))) errors.push('Website must include http:// or https://');
+        if (website.length > 255) errors.push("Website must be 255 characters or less")
         setWebsiteValidationErrors(errors);
     }, [website])
 
@@ -387,7 +388,7 @@ const BusinessForm = ({business, action}) => {
                         ))}
                     </>
                 </div>
-                <button className="business-form-submit-button" type="submit">Submit</button>
+                <button disabled={!readyToSubmit} className={readyToSubmit ?"business-form-submit-button": "business-form-submit-button-not-ready"} type="submit">Submit</button>
             </form>
             <div className="business-form-upload-image">
                 <h3>Upload images: only .png, .jpg, .jpeg, and .gif accepted. </h3>
