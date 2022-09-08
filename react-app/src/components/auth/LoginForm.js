@@ -18,8 +18,8 @@ const LoginForm = () => {
   useEffect(()=> {
     const errors = [];
     setErrors([]);
-    if (!email.length) errors.push('email is required');
-    if (email.length > 255) errors.push('email is 255 characters or less')
+    if (!email.length) errors.push('Email is required');
+    if (email.length > 255) errors.push('Email is 255 characters or less')
 
     function ValidateEmail(email) {
       var mailformat = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;

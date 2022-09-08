@@ -3,7 +3,7 @@ from app.models import db, Review
 def seed_reviews():
 
     review1 = Review(
-        user_id = 1,
+        user_id = 7,
         business_id = 1,
         content = 'The food was great.   Customer service was very efficient and the fact that they are only open for limited hours is more desirable',
         rating = 1
@@ -31,7 +31,7 @@ def seed_reviews():
         rating = 3
     )
     review4 = Review(
-        user_id = 1,
+        user_id = 8,
         business_id = 2,
         content = 'Love this bar! The interior design is very warm and upscale. The vibe is great. Love that they have live music and host local art during events. Check it out.',
         rating = 4
@@ -115,7 +115,7 @@ def seed_reviews():
         rating = 4
     )
     review15 = Review(
-        user_id = 5,
+        user_id = 1,
         business_id = 7,
         content = 'This ice cream was delicious. Incredibly sweet, but tasty nonetheless. The girl serving us was very kind about giving my mom and I at least ten samples.',
         rating = 5
@@ -187,13 +187,13 @@ def seed_reviews():
         rating = 1
     )
     review27 = Review(
-        user_id = 8,
+        user_id = 2,
         business_id = 13,
         content = 'Supcrab delivers to my area at least once a week. Aside from fresh seafood (seafood boil or cooked Chinese style), they have a ton of authentic Chinese (Cantonese, Sichuan...) and Malaysian dishes, as well as select items from a few partners.',
         rating = 2
     )
     review28 = Review(
-        user_id = 9,
+        user_id = 3,
         business_id = 14,
         content = 'Overrated. If ur asking to pay this much $$$ for ice cream, the taste better blow my mind. I ordered vanilla Oreo, and honestly, the best part of the ice cream was the Oreos.',
         rating = 3

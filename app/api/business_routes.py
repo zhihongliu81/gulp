@@ -33,7 +33,7 @@ def get_all_businesses():
 def get_one_business(business_id):
     business = Business.query.get(business_id)
     if not business:
-        return {'errors': ['business can not be found']},404
+        return {'errors': ['Business can not be found']},404
 
     return business.to_dict()
 
@@ -43,7 +43,7 @@ def get_one_business(business_id):
 def get_all_comments(business_id):
     business = Business.query.get(business_id)
     if not business:
-        return {'errors': ['business can not be found']},404
+        return {'errors': ['Business can not be found']},404
 
     reviews = {}
     for review in business.reviews:
@@ -57,7 +57,7 @@ def get_all_comments(business_id):
 def get_all_images(business_id):
     business = Business.query.get(business_id)
     if not business:
-        return {'errors': ['business can not be found']},404
+        return {'errors': ['Business can not be found']},404
 
     images = {}
     for image in business.images:
@@ -71,12 +71,12 @@ def get_all_images(business_id):
 @login_required
 def add_images():
     if "image" not in request.files:
-        return {"errors": ["image required"]}, 400
+        return {"errors": ["Image required"]}, 400
 
     image = request.files["image"]
 
     if not allowed_file(image.filename):
-        return {"errors": ["file type not permitted"]}, 400
+        return {"errors": ["File type not permitted"]}, 400
 
     image.filename = get_unique_filename(image.filename)
 
@@ -143,7 +143,7 @@ def create_business():
 def edit_business(business_id):
     business = Business.query.get(business_id)
     if not business:
-        return {'errors': ['business can not be found']},404
+        return {'errors': ['Business can not be found']},404
     if business.user_id != current_user.id:
         return {"errors": ['Unauthorized']}, 401
 
@@ -227,11 +227,11 @@ def create_review(business_id):
 def update_review(business_id, review_id):
     business = Business.query.get(business_id)
     if not business:
-        return {'errors': ['business can not be found']}, 404
+        return {'errors': ['Business can not be found']}, 404
 
     review = Review.query.get(review_id)
     if not review:
-        return {'errors': ['review can not be found']}, 404
+        return {'errors': ['Review can not be found']}, 404
 
     if review.user_id != current_user.id:
         return {"errors": ['Unauthorized']}, 401

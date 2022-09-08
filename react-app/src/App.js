@@ -81,6 +81,7 @@ function App() {
         </div>
         <div className='app-footer-container'>
           <a href={'https://github.com/zhihongliu81/gulp'} target="_blank">GitHub Repository | gulp</a>
+          <a href='https://www.linkedin.com/in/zhihong-liu-915a08114/' target="_blank">LinkedIn</a>
           <p>AWS</p>
           <p>Python</p>
           <p>React</p>
