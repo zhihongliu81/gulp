@@ -229,7 +229,7 @@
 
 .business-detail-info-right-container > div {
     border-bottom: 2px solid rgba(128, 128, 128, 0.2);
-    width: 16.5vw;
+    width: 100%;
     overflow: auto;
 }
 
