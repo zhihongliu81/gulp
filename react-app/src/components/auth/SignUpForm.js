@@ -44,7 +44,7 @@ const SignUpForm = () => {
   useEffect(()=> {
     const errors = [];
     setErrors([]);
-    if (!email.length) errors.push('email is required');
+    if (!email.length) errors.push('Email is required');
     if (email.length > 255) errors.push("Email must be 255 characters or less")
 
     function ValidateEmail(email) {

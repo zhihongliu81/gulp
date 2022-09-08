@@ -132,7 +132,7 @@ const GetBusinessDetail = () => {
 
 
                     </div>
-                    {user && <button className='business-detail-review-button' onClick={() => { setShowReviewModal(true); setAction('create') }}>Write a Review</button>}
+                    {user && user.id !== business.userId && <button className='business-detail-review-button' onClick={() => { setShowReviewModal(true); setAction('create') }}>Write a Review</button>}
                     <>
                         {showReviewModal &&
                             <Modal onClose={() => setShowReviewModal(false)}>

@@ -91,7 +91,7 @@ const BusinessForm = ({business, action}) => {
         setErrors([]);
         const errors =[];
         if (zipcode.length !== 5) errors.push("Zipcode must be 5 numbers");
-        if (!onlyDigits(zipcode)) errors.push("Only number in zipcode")
+        if (!onlyDigits(zipcode)) errors.push("Only number allowed in zipcode")
         setZipcodeValidationErrors(errors);
     }, [zipcode])
 
@@ -137,7 +137,7 @@ const BusinessForm = ({business, action}) => {
     useEffect(() => {
         setErrors([]);
         const errors =[];
-        if (images.length === 0) errors.push("Images are required");
+        if ( action === 'create' && images.length === 0) errors.push("Images are required");
         setImagesValidationErrors(errors);
     }, [images])
 
