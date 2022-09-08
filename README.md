@@ -40,6 +40,15 @@ on this page you have buttons for editing and deleting this business, and you al
 on this page you have buttons for deiting and deleting the reviews.
 ![business detail page - bottom](https://user-images.githubusercontent.com/102339574/189023169-065d2a64-1d87-46f8-bc3b-07b9ca91644a.png)
 
+### create business form:
+on this page you can create a business. You can load images with the choose file button and the add image button. If you upload a file with wrong type, a window alert will show.
+![create business form](https://user-images.githubusercontent.com/102339574/189026664-fbc57b16-f44a-4181-948f-5a7eac632cdb.png)
+
+### create review form:
+![create review form](https://user-images.githubusercontent.com/102339574/189026827-9e2bbdef-9dd5-42c8-843e-805dd4117fbc.png)
+
+
+
 
 
 
