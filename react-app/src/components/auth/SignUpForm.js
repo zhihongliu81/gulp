@@ -48,7 +48,7 @@ const SignUpForm = () => {
     if (email.length > 255) errors.push("Email must be 255 characters or less")
 
     function ValidateEmail(email) {
-      var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      var mailformat = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
       if (email.match(mailformat)) {
         return true;
       }
