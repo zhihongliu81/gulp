@@ -34,6 +34,8 @@
     flex-direction: row;
     border: 1px solid rgba(128, 128, 128, 0.3);
     border-radius: 8px;
+    width: 600px;
+
 }
 
 .business-list-image {
@@ -49,6 +51,8 @@
     cursor: pointer;
     font-size: 24px;
     font-weight: bold;
+    overflow-wrap: break-word;
+    width: 300px;
 }
 
 .business-list-name:hover {

@@ -24,6 +24,7 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 50px;
+    margin-top: 20px;
 
 
 }
@@ -38,6 +39,8 @@
     font-size: 48px;
     color: white;
     font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    margin: 10px 0;
+
 }
 
 .business-detail-busi-name > p {
@@ -107,14 +110,17 @@
     color: white;
     border: 1px solid #D32323;
     border-radius: 8px;
-    margin-top: 30px;
+    margin-top: 50px;
 }
 
 .business-detail-image-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 20px 0;
+    /* margin: 20px 0; */
+    margin-top: 40px;
+    margin-bottom: 40px;
+    max-width: 50vw;
     border-top: 2px solid rgba(128, 128, 128, 0.2);
 
 }
@@ -152,6 +158,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-width: 50vw;
     border-top: 2px solid rgba(128, 128, 128, 0.2);
 }
 
