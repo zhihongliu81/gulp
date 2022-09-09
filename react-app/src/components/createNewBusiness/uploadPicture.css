@@ -11,6 +11,12 @@
     margin-top: 50px;
 }
 
+.upload-picture-form > p {
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+}
+
 .upload-picture-image {
     width: 200px;
     height: 200px;
