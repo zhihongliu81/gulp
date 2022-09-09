@@ -205,7 +205,7 @@ def create_review(business_id):
         return {'errors': ['Business cannot be found']}, 400
 
     if business.user_id == current_user.id:
-        return {'errors': ['Users can not create reviews of their businesses']}
+        return {'errors': ['Users can not create reviews of their businesses']}, 401
 
     form = ReviewForm()
     form['csrf_token'].data = request.cookies['csrf_token']
