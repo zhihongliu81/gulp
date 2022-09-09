@@ -60,7 +60,7 @@ const BusinessForm = ({business, action}) => {
         setErrors([]);
         const errors =[];
         if(name.length === 0) errors.push("Name is required");
-        if(name.length > 100 ) errors.push("Name must be 100 characters or less");
+        if(name.length > 50 ) errors.push("Name must be 50 characters or less");
         setNameValidationErrors(errors);
     }, [name])
 

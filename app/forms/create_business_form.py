@@ -5,7 +5,7 @@ from app.models import Business
 
 
 class CreateBusinessForm(FlaskForm):
-    name = StringField("name",validators=[DataRequired(message='Name is required'), Length( max=100, message="Name is 100 characters or less")])
+    name = StringField("name",validators=[DataRequired(message='Name is required'), Length( max=50, message="Name is 50 characters or less")])
     address = StringField("address",validators=[DataRequired(message='Address is required'), Length( max=255, message="Address is 255 characters or less")])
     city = StringField("city",validators=[DataRequired(message='City is required'), Length( max=50, message="City is 50 characters or less")])
     state = StringField("State",validators=[DataRequired(message='State is required'), Length( max=50, message="State is 50 characters or less")])
