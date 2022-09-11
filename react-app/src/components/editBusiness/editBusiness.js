@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import BusinessForm from "../createNewBusiness/businessForm";
 // import { editBusinessThunk } from "../../store/business";
 
@@ -8,6 +8,11 @@ import BusinessForm from "../createNewBusiness/businessForm";
 const EditBusiness = () => {
     const {businessId} =useParams()
     const business = useSelector(state => state.business[businessId])
+    const user = useSelector(state => state.session.user)
+
+    if (!user) {
+        return <Redirect to='/' />;
+      }
 
 
     return (

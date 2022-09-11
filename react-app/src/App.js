@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, NavLink, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
@@ -19,6 +19,7 @@ import SearchResults from './components/searchResults/searchResults';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const user = useSelector(state => state.session.user)
 
   useEffect(() => {
     (async() => {
@@ -79,7 +80,7 @@ function App() {
             </Route>
           </Switch>
         </div>
-        <div className='app-footer-container'>
+        {!user && <div className='app-footer-container'>
           <a href={'https://github.com/zhihongliu81/gulp'} target="_blank">GitHub Repository | gulp</a>
           <a href='https://www.linkedin.com/in/zhihong-liu-915a08114/' target="_blank">LinkedIn</a>
           <p>AWS</p>
@@ -90,7 +91,7 @@ function App() {
           <p>Flask</p>
           <p>PostgreSQL</p>
           <p>Docker</p>
-        </div>
+        </div>}
 
 
 

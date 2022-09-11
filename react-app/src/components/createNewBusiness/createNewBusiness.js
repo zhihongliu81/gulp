@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import BusinessForm from "./businessForm";
 import { createBusinessThunk } from "../../store/business";
@@ -8,6 +8,11 @@ import { createBusinessThunk } from "../../store/business";
 
 const CreateNewBusiness = () => {
     // const dispatch = useDispatch();
+    const user = useSelector(state => state.session.user)
+
+    if (!user) {
+        return <Redirect to='/' />;
+      }
 
 
     return (
