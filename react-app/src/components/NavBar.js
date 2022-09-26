@@ -27,9 +27,9 @@ const NavBar = () => {
           <div>
             <NavLink className={'navbar-homelink'} to='/' exact={true} activeClassName='active' >gulp</NavLink>
           </div>
-          {/* <div>
+          <div>
             <SearchBar />
-          </div> */}
+          </div>
           <div>
 
             <div>
@@ -38,7 +38,7 @@ const NavBar = () => {
                   <div>
                     <NavLink className={'navbar-add-business'} to='/businesses/new' exact={true} activeClassName='active'>Add a Business</NavLink>
                   </div >
-                  
+
                     < LogoutButton  />
 
 
