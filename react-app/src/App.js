@@ -49,6 +49,10 @@ function App() {
               <SignUpForm />
             </Route>
 
+            <Route path={'/user/reviews'} exact={true}>
+              <h1>Your profile of reviews</h1>
+            </Route>
+
             <Route path='/' exact={true} >
               <GetAllBusinesses />
             </Route>
