@@ -15,6 +15,7 @@ import GetBusinessDetail from './components/getBusinessDetail/getBusinessDetail'
 import CreateNewBusiness from './components/createNewBusiness/createNewBusiness';
 import EditBusiness from './components/editBusiness/editBusiness';
 import SearchResults from './components/searchResults/searchResults';
+import GetUserProfile from './components/userProfile/userProfile';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -50,7 +51,7 @@ function App() {
             </Route>
 
             <Route path={'/user/reviews'} exact={true}>
-              <h1>Your profile of reviews</h1>
+              <GetUserProfile />
             </Route>
 
             <Route path='/' exact={true} >
