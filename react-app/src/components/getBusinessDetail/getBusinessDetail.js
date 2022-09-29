@@ -39,14 +39,6 @@ const GetBusinessDetail = () => {
 
 
 
-     // google map
-    // const [map, setMap] = useState(null);
-    // const { isLoaded } = useJsApiLoader({
-    //     id: 'google-map-script',
-    //     googleMapsApiKey: "AIzaSyD8hA70qVS9kdmSdnRjmws77Xu3GCHeMjo"
-    //   })
-
-
     //   Geocode
     Geocode.setApiKey(APIKey);
     Geocode.setLanguage("en");
