@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import './uploadPicture.css'
 
 
 const UploadPicture = ({setImages, action}) => {
-    const history = useHistory(); // so that we can redirect after the image upload is successful
+    // const history = useHistory();
     const [image, setImage] = useState(null);
     const [imageLoading, setImageLoading] = useState(false);
     const [urls, setUrls] = useState([])

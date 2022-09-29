@@ -64,12 +64,13 @@
 .navbar-add-business-logout-container {
     display: flex;
     flex-direction: row;
+    align-items: center;
     padding-right: 50px;
 }
 
 .navbar-add-business {
     text-decoration: none;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 600;
     color: white;
     font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
@@ -78,12 +79,11 @@
 
 .navbar-logout {
     cursor: pointer;
-    background-color: #D32323;
-    font-size: 20px;
+    background-color: transparent;
+    font-size: 1rem;
     font-weight: 600;
-    color: white;
-    border: 1px solid #D32323;
+    color: rgba(45, 46, 47, 0.6);
+    border: 0;
     border-radius: 5px;
     font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
-
 }

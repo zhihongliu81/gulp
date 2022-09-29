@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, NavLink, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
-import ProtectedRoute from './components/auth/ProtectedRoute';
+// import ProtectedRoute from './components/auth/ProtectedRoute';
 // import UsersList from './components/UsersList';
 // import User from './components/User';
 import { authenticate } from './store/session';
@@ -15,6 +15,7 @@ import GetBusinessDetail from './components/getBusinessDetail/getBusinessDetail'
 import CreateNewBusiness from './components/createNewBusiness/createNewBusiness';
 import EditBusiness from './components/editBusiness/editBusiness';
 import SearchResults from './components/searchResults/searchResults';
+import GetUserProfile from './components/userProfile/userProfile';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -49,6 +50,10 @@ function App() {
               <SignUpForm />
             </Route>
 
+            <Route path={'/user/reviews'} exact={true}>
+              <GetUserProfile />
+            </Route>
+
             <Route path='/' exact={true} >
               <GetAllBusinesses />
             </Route>
@@ -81,8 +86,8 @@ function App() {
           </Switch>
         </div>
         {!user && <div className='app-footer-container'>
-          <a href={'https://github.com/zhihongliu81/gulp'} target="_blank">GitHub Repository | gulp</a>
-          <a href='https://www.linkedin.com/in/zhihong-liu-915a08114/' target="_blank">LinkedIn</a>
+          <a href={'https://github.com/zhihongliu81/gulp'} rel="noreferrer" target="_blank">GitHub Repository | gulp</a>
+          <a href='https://www.linkedin.com/in/zhihong-liu-915a08114/' rel="noreferrer" target="_blank">LinkedIn</a>
           <p>AWS</p>
           <p>Python</p>
           <p>React</p>

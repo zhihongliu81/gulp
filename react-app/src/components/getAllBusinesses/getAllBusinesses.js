@@ -26,12 +26,12 @@ const GetAllBusinesses = () => {
 
     return ( isLoaded &&
         <div className='business-list-main-container'>
-            <img className='business-list-splash-image' alt='splash image' src='https://res.cloudinary.com/zhihongliu/image/upload/v1661976915/steakhouse-2_oxmazi.jpg' />
+            <img className='business-list-splash-image' alt='splash' src='https://res.cloudinary.com/zhihongliu/image/upload/v1661976915/steakhouse-2_oxmazi.jpg' />
             <h2>Your Next Review Awaits</h2>
             <div className='business-list-container'>
                 {businessList.map(business => (
                     <div key={business.id} className='business-list-detail-container'>
-                        { business.images.length > 0 && <img className='business-list-image' src={business.images[0].url} />}
+                        { business.images.length > 0 && <img alt='business' className='business-list-image' src={business.images[0].url} />}
                         <div className='business-list-detail-right-container'>
                             <h3 className='business-list-name' onClick={() => {history.push(`/businesses/${business.id}`)}}>{business.name}</h3>
                             <p>Do you recommend this business?</p>

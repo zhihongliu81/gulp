@@ -1,10 +1,11 @@
 
-import React, { useState, useEffect} from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
+// import LogoutButton from './auth/LogoutButton';
 import './NavBar.css'
 import SearchBar from './searchBar/searchBar';
+import ProfileButton from './profileButton/profileButton';
 
 const NavBar = () => {
   const user = useSelector(state => state.session.user);
@@ -27,19 +28,20 @@ const NavBar = () => {
           <div>
             <NavLink className={'navbar-homelink'} to='/' exact={true} activeClassName='active' >gulp</NavLink>
           </div>
-          {/* <div>
+          <div>
             <SearchBar />
-          </div> */}
+          </div>
           <div>
 
             <div>
               {user ?
                 <div className='navbar-add-business-logout-container'>
-                  <div>
+
                     <NavLink className={'navbar-add-business'} to='/businesses/new' exact={true} activeClassName='active'>Add a Business</NavLink>
-                  </div >
-                  
-                    < LogoutButton  />
+
+
+                  {/* < LogoutButton /> */}
+                  <ProfileButton />
 
 
                 </div>
