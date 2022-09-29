@@ -1,8 +1,8 @@
 
-import React, { useState, useEffect} from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { NavLink, useLocation } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
+// import LogoutButton from './auth/LogoutButton';
 import './NavBar.css'
 import SearchBar from './searchBar/searchBar';
 import ProfileButton from './profileButton/profileButton';
@@ -38,7 +38,7 @@ const NavBar = () => {
                 <div className='navbar-add-business-logout-container'>
 
                     <NavLink className={'navbar-add-business'} to='/businesses/new' exact={true} activeClassName='active'>Add a Business</NavLink>
-    
+
 
                   {/* < LogoutButton /> */}
                   <ProfileButton />

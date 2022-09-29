@@ -10,7 +10,7 @@ import { logout } from '../../store/session';
 
 const ProfileButton = () => {
     const dispatch = useDispatch();
-    const history = useHistory();
+    // const history = useHistory();
     const dropdownMenu = useRef(null);
     const [showDropdown, setShowDropdown] = useState(false);
     const ToLogout = async (e) => {

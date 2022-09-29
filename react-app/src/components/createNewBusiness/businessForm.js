@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import { useHistory, useParams } from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import { useHistory } from "react-router-dom";
+import {useDispatch} from "react-redux";
 import UploadPicture from "./uploadPicture";
 import { createBusinessThunk, editBusinessThunk } from "../../store/business";
 import './businessForm.css'

@@ -12,6 +12,7 @@ from app.models.review import Review
 from .auth_routes import validation_errors_to_error_messages
 import json
 from urllib.parse import parse_qs
+import os
 
 business_routes = Blueprint('business', __name__)
 
@@ -287,3 +288,9 @@ def search_business():
         res[business.id] = business.to_dict()
 
     return  res
+
+
+@business_routes.route('/googleAPIKey')
+def get_google_API_key():
+    GOOGLE_API_KEY = os.environ.get("GOOGLE_MAPS_API_KEY")
+    return {"googleApiKey": GOOGLE_API_KEY}

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 // import { Rating } from 'react-simple-star-rating';
 import { createReviewThunk, updateReviewThunk } from '../../store/review';
-import { startTransition } from 'react';
+// import { startTransition } from 'react';
 import './reviewForm.css';
 import ratingStarFilled from '../../images/rating-star-filled-1.png'
 import ratingStarEmpty from '../../images/rating-star-empty-1.png'
@@ -42,9 +42,9 @@ export default function ReviewForm({close,businessId, business, reviewId, action
     //     setShowRatingErrors(true)
     // }
 
-    const handleRating = (rating) => {
-        setRating(rating)
-    }
+    // const handleRating = (rating) => {
+    //     setRating(rating)
+    // }
 
     const handleSubmit = (e) => {
         e.preventDefault();

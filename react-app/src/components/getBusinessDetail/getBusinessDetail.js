@@ -8,14 +8,17 @@ import { getBusinessDetailThunk, deleteBusinessThunk } from '../../store/busines
 import { getAllReviewsThunk, deleteReviewThunk } from '../../store/review';
 import { getAllImagesThunk } from '../../store/image';
 import './getBusinessDetail.css';
-import { Rating } from 'react-simple-star-rating';
+// import { Rating } from 'react-simple-star-rating';
 import ReviewForm from './reviewForm';
 import { Modal } from '../../context/Modal';
 import ratingStarFilled from '../../images/rating-star-filled-1.png';
 import ratingStarEmpty from '../../images/rating-star-empty-1.png';
+import { GoogleMap, useJsApiLoader, Marker, LoadScript } from '@react-google-maps/api';
+import Geocode from "react-geocode";
 
 
 const GetBusinessDetail = () => {
+    console.log("at the top of the component")
     const dispatch = useDispatch();
     const history = useHistory();
     const {businessId} = useParams();
@@ -31,12 +34,58 @@ const GetBusinessDetail = () => {
     const [action, setAction] = useState('');
     const [reviewId, setReviewId] = useState('');
     const [currentReview, setCurrentReview] = useState({});
+    const [center, setCenter] = useState({lat: 29.879444, lng: -97.938889});
+    const [APIKey, setAPIKey] = useState('');
+
+
+
+     // google map
+    // const [map, setMap] = useState(null);
+    // const { isLoaded } = useJsApiLoader({
+    //     id: 'google-map-script',
+    //     googleMapsApiKey: "AIzaSyD8hA70qVS9kdmSdnRjmws77Xu3GCHeMjo"
+    //   })
+
+
+    //   Geocode
+    Geocode.setApiKey(APIKey);
+    Geocode.setLanguage("en");
+    Geocode.setRegion("us");
+    Geocode.setLocationType("ROOFTOP");
+    Geocode.enableDebug();
+
 
     useEffect(() => {
         dispatch(getBusinessDetailThunk(businessId)).then(() => setBusinessIsLoaded(true));
         dispatch(getAllReviewsThunk(businessId)).then(() => setReviewsIsLoaded(true));
         dispatch(getAllImagesThunk(businessId)).then(() => setImagesIsLoaded(true));
+        fetch('/api/businesses/googleAPIKey').then( async (response) => {
+            const data = await response.json()
+            setAPIKey(data["googleApiKey"])
+
+        })
+
     }, [dispatch, businessId])
+
+    useEffect(() => {
+
+        if (business) {
+            const businessAddress = `${business.address}, ${business.city}, ${business.state} ${business.zipcode}`;
+            if (APIKey) {
+                // Get latitude & longitude from address.
+                Geocode.fromAddress(businessAddress).then(
+                    (response) => {
+                        const { lat, lng } = response.results[0].geometry.location;
+                        setCenter({ lat, lng })
+                    },
+                    (error) => {
+                        console.error(error);
+                    }
+                );
+            }
+
+        }
+    }, [business, APIKey])
 
     let priceRange;
     if (business) {
@@ -100,6 +149,14 @@ const GetBusinessDetail = () => {
 
 
 
+
+
+    const containerStyle = {
+        width: '400px',
+        height: '400px'
+      };
+
+
     return (businessIsLoaded && reviewsIsLoaded && imagesIsLoaded &&
         <div className='business-detail-main-container'>
             <img className='business-detail-splash-image' alt='business detail splash image' src={imageList[0]} />
@@ -123,12 +180,12 @@ const GetBusinessDetail = () => {
                             <p>{totalReviews} reviews</p>
                         </div>
 
-                            {user && user.id === business.userId &&
-                                <div className='business-detail-busi-buttons'>
-                                    <NavLink to={`/businesses/${businessId}/edit`}>Edit</NavLink>
-                                    <button onClick={handleDeleteBusiness}>Delete</button>
-                                </div>
-                            }
+                        {user && user.id === business.userId &&
+                            <div className='business-detail-busi-buttons'>
+                                <NavLink to={`/businesses/${businessId}/edit`}>Edit</NavLink>
+                                <button onClick={handleDeleteBusiness}>Delete</button>
+                            </div>
+                        }
 
 
                     </div>
@@ -144,18 +201,33 @@ const GetBusinessDetail = () => {
                         <div>
                             <div >
                                 <div className='business-detail-image-section'>
-                                <h3>Photos</h3>
-                                <div className='business-detail-image-container'>
-                                    {imageList.map(url => {
-                                        return (
-                                            <div>
-                                                <img className='business-detail-image' key={url} alt='' src={url} />
-                                            </div>
+                                    <h3>Photos</h3>
+                                    <div className='business-detail-image-container'>
+                                        {imageList.map(url => {
+                                            return (
+                                                <div key={url}>
+                                                    <img className='business-detail-image' alt='' src={url} />
+                                                </div>
 
-                                        )
-                                    })}
+                                            )
+                                        })}
+                                    </div>
+
                                 </div>
-
+                                <div>
+                                    {APIKey &&
+                                        <LoadScript googleMapsApiKey={APIKey}>
+                                            <GoogleMap
+                                                mapContainerStyle={containerStyle}
+                                                center={center}
+                                                zoom={10}
+                                            >
+                                                <>
+                                                    <Marker position={center}></Marker>
+                                                </>
+                                            </GoogleMap>
+                                        </LoadScript>
+                                    }
                                 </div>
 
                                 <div className='business-detail-review-section'>
