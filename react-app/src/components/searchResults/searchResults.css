@@ -18,7 +18,10 @@
 .search-result-left-container {
     width: 60%;
     border-top: 1px solid rgba(128,128,128,0.3);
+}
 
+#onHover {
+    background-color: rgba(250,235,215,0.3);
 }
 
 .search-result-detail-container {
@@ -30,6 +33,7 @@
     margin-right: 2rem;
     width: 42vw;
     overflow-wrap: break-word;
+    border-radius: 8px;
 
 }
 
@@ -51,6 +55,11 @@
     margin: 0px;
     overflow-wrap: break-word;
     font-size: 2rem;
+    cursor: pointer;
+}
+
+.search-result-business-name:hover {
+    text-decoration: underline;
 }
 
 .search-result-busi-review {

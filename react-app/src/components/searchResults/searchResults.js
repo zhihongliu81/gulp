@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Rating } from 'react-simple-star-rating';
+// import { Rating } from 'react-simple-star-rating';
 import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 import Geocode from "react-geocode";
 // import { businessPositions } from '../../store/position';
@@ -13,11 +13,20 @@ import ratingStarEmpty from '../../images/rating-star-empty-1.png';
 const SearchResults = () => {
     const businesses = useSelector(state => state.business);
     const history = useHistory();
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const [APIKey, setAPIKey] = useState('');
     // const positions = useSelector(state => state.position);
     const [positions, setPositions] = useState({})
     // const [center, setCenter] = useState({lat: 29.879444, lng: -97.938889});
+    const [isHovering, setIsHovering] = useState(-1);
+
+    const handleMouseOver = (index) => {
+        setIsHovering(index);
+    };
+
+    const handleMouseOut = () => {
+        setIsHovering(-1);
+    };
 
  //   Geocode
  Geocode.setApiKey(APIKey);
@@ -105,9 +114,9 @@ const SearchResults = () => {
         <div className='search-result-container'>
             <h2>{total_businesses} {total_businesses === 1 ? 'Result' : 'Results'} Found.</h2>
             <div className='search-result-content-container'>
-                <div className='search-result-left-container'>
+                <div className= 'search-result-left-container' >
                     {businessList.map((business, index) => (
-                        <div key={business.id} className='search-result-detail-container'>
+                        <div key={business.id} id= {isHovering === index ? 'onHover' : ''} className={'search-result-detail-container' } onMouseOver={() => handleMouseOver(index)} onMouseOut={handleMouseOut}>
                             {business.images.length > 0 && <img className='search-result-image' src={business.images[0].url} />}
                             <div className='search-result-detail-right-container'>
                                 <h3 className='search-result-business-name' onClick={() => { history.push(`/businesses/${business.id}`) }}>{index + 1}. {business.name}</h3>

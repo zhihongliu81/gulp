@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, useHistory, useParams, Redirect } from 'react-router-dom';
 import { getProfileThunk } from '../../store/session';
 import './userProfile.css';
+import businessIcon from '../../images/businesses.jpg';
+import reviewIcon from '../../images/reviews.png';
 
 
 const GetUserProfile = () => {
@@ -25,12 +27,14 @@ const GetUserProfile = () => {
         return <Redirect to='/' />;
       }
 
-    if (businesses) {
-        const businessesList = Object.values(businesses);
-    }
 
+    let businessesList = [];
+    if (businesses) {
+        businessesList = Object.values(businesses);
+    }
+    let reviewsList = [];
     if (reviews) {
-        const reviewsList = Object.values(reviews);
+        reviewsList = Object.values(reviews);
     }
 
 
@@ -38,12 +42,16 @@ const GetUserProfile = () => {
     return (
         profileIsLoaded &&
         <div className='profile-main-container'>
-            <h1>{user.firstName} {user.lastName[0].toUpperCase()}.</h1>
-            <div>
-                <div>
-                    <p></p>
+            <div className='profile-user-info'>
+                <h1>{user.firstName} {user.lastName[0].toUpperCase()}.</h1>
+                <div className='profile-user-business-review'>
+                    <img className='profile-icon-image' alt='total reviews' src={reviewIcon} />
+                    <p>{reviewsList.length} {reviewsList.length === 1 ? 'review' : 'reviews'}</p>
+                    <img className='profile-icon-image' alt='total businesses' src={businessIcon} />
+                    <p>{businessesList.length} {businessesList.length === 1 ? 'business' : 'businesses'}</p>
                 </div>
             </div>
+
         </div>
 
 
