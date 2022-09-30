@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Rating } from 'react-simple-star-rating';
-import { GoogleMap, Marker, LoadScript, MarkerClusterer } from '@react-google-maps/api';
+import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 import Geocode from "react-geocode";
-import { businessPositions } from '../../store/position';
+// import { businessPositions } from '../../store/position';
 import './searchResults.css';
+import ratingStarFilled from '../../images/rating-star-filled-1.png';
+import ratingStarEmpty from '../../images/rating-star-empty-1.png';
 
 
 const SearchResults = () => {
@@ -13,7 +15,8 @@ const SearchResults = () => {
     const history = useHistory();
     const dispatch = useDispatch();
     const [APIKey, setAPIKey] = useState('');
-    const positions = useSelector(state => state.position);
+    // const positions = useSelector(state => state.position);
+    const [positions, setPositions] = useState({})
     // const [center, setCenter] = useState({lat: 29.879444, lng: -97.938889});
 
  //   Geocode
@@ -52,7 +55,8 @@ const SearchResults = () => {
                             alert(`Can not get the lat and lng of this address: ${businessAddress}.`);
                         }
                 }
-                 dispatch(businessPositions(latLngs));
+                //  dispatch(businessPositions(latLngs));
+                setPositions(latLngs)
 
             }
 
@@ -78,7 +82,7 @@ const SearchResults = () => {
             averRating = (total / totalReviews).toFixed(1)
         }
 
-        return averRating
+        return [averRating, totalReviews]
     }
 
     const phoneNumberFormat = (phoneNumber) => {
@@ -87,8 +91,8 @@ const SearchResults = () => {
 
 
     const containerStyle = {
-        width: '400px',
-        height: '400px'
+        width: '40vw',
+        height: '70vh'
       };
 
 
@@ -100,30 +104,56 @@ const SearchResults = () => {
     return ( businesses &&
         <div className='search-result-container'>
             <h2>{total_businesses} {total_businesses === 1 ? 'Result' : 'Results'} Found.</h2>
-            {businessList.map(business => (
-                <div key={business.id} className='business-list-detail-container'>
-                    {business.images.length > 0 && <img className='business-list-image' src={business.images[0].url} />}
-                    <div className='business-list-detail-right-container'>
-                        <h3 className='business-list-name' onClick={() => { history.push(`/businesses/${business.id}`) }}>{business.name}</h3>
-                        <Rating initialValue={businessRating(business)} allowHalfIcon={true} readonly={true} />
-                        <p>{phoneNumberFormat(business.phoneNumber)}</p>
-                        <p>{business.address}, {business.city}, {business.state}</p>
+            <div className='search-result-content-container'>
+                <div className='search-result-left-container'>
+                    {businessList.map((business, index) => (
+                        <div key={business.id} className='search-result-detail-container'>
+                            {business.images.length > 0 && <img className='search-result-image' src={business.images[0].url} />}
+                            <div className='search-result-detail-right-container'>
+                                <h3 className='search-result-business-name' onClick={() => { history.push(`/businesses/${business.id}`) }}>{index + 1}. {business.name}</h3>
+                                <div className='search-result-busi-review'>
+                                    <div className='search-result-busi-rating'>
+                                        <div className='busi-review-star-container'>
+                                            {[1, 2, 3, 4, 5].map(ele => {
+                                                return (
+                                                    <div key={ele} >
+                                                        {businessRating(business)[0] >= ele ? <img alt='' src={ratingStarFilled} /> : <img alt='' src={ratingStarEmpty} />}
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                        <p>{businessRating(business)[0]}</p>
+                                    </div>
 
-                    </div>
+
+                                    <p>{businessRating(business)[1]} {businessRating(business)[1] === 1 ? 'Review' : 'Reviews'}</p>
+                                </div>
+                                <p>{phoneNumberFormat(business.phoneNumber)}</p>
+                                <div className='search-result-business-address'>
+                                    {business.address}, {business.city}, {business.state}
+                                </div>
+
+
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            ))}
-            <div>
-                {APIKey &&
-                    <LoadScript googleMapsApiKey={APIKey}>
-                        <GoogleMap mapContainerStyle={containerStyle} zoom={12} center={locationIds.length > 0 ? positions[locationIds[0]] : defaultCenter}>
 
-                            {locationIds.map((locationId) => (
-                                <Marker icon={{url:"https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"}} className="google-map-marker" key={positions[locationId].lat + positions[locationId].lng} position={positions[locationId]} label={businesses[locationId]?.name.slice(0, 3)}/>
-                            ))}
-                        </GoogleMap>
-                    </LoadScript>
-                }
+                <div className='search-result-map-container'>
+                    {APIKey &&
+                        <LoadScript googleMapsApiKey={APIKey}>
+                            <GoogleMap mapContainerStyle={containerStyle} zoom={13} center={locationIds.length > 0 ? positions[locationIds[0]] : defaultCenter}>
+
+                                {locationIds.map((locationId) => (
+                                    <Marker className="google-map-marker" key={positions[locationId].lat + positions[locationId].lng} position={positions[locationId]} label={businesses[locationId]?.name.slice(0, 3)} />
+                                ))}
+                            </GoogleMap>
+                        </LoadScript>
+                    }
+                </div>
+
             </div>
+
         </div>
     )
 

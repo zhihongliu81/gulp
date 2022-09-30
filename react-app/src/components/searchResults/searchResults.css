@@ -1,7 +1,101 @@
 .search-result-container {
     margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
 }
 
-.google-map-marker {
-    size: 10rem;
+.search-result-container > h2 {
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    font-size: 3rem;
+}
+
+.search-result-content-container {
+    display: flex;
+    flex-direction: row;
+    width: 80vw;
+}
+
+.search-result-left-container {
+    width: 60%;
+    border-top: 1px solid rgba(128,128,128,0.3);
+
+}
+
+.search-result-detail-container {
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid rgba(128,128,128,0.3);
+    margin-right: 2rem;
+    width: 42vw;
+    overflow-wrap: break-word;
+
+}
+
+.search-result-image {
+    height: 20vh;
+    width: 20vh;
+    object-fit: cover;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.search-result-detail-right-container {
+    margin-left: 1rem;
+
+}
+
+.search-result-business-name {
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    margin: 0px;
+    overflow-wrap: break-word;
+    font-size: 2rem;
+}
+
+.search-result-busi-review {
+    display: flex;
+    flex-direction: column;
+}
+
+.search-result-busi-rating {
+    display: flex;
+    flex-direction: row;
+}
+
+.busi-review-star-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.busi-review-star-container img {
+    height: 1.5rem;
+    width: 1.5rem;
+    object-fit: cover;
+    margin-right: 0.2rem;
+}
+
+.search-result-busi-review > p {
+    margin: 0px;
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+}
+
+.search-result-detail-right-container > p {
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    font-size: 1rem;
+    overflow-wrap: break-word;
+}
+
+.search-result-business-address {
+    width: 30vw;
+    overflow-wrap: break-word;
+    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
+    font-size: 1rem;
+}
+
+.search-result-map-container {
+    position: fixed;
+    top: 24.6vh;
+    right: 1.6vw;
 }
