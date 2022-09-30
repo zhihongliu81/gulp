@@ -13,12 +13,12 @@ import ReviewForm from './reviewForm';
 import { Modal } from '../../context/Modal';
 import ratingStarFilled from '../../images/rating-star-filled-1.png';
 import ratingStarEmpty from '../../images/rating-star-empty-1.png';
-import { GoogleMap, useJsApiLoader, Marker, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 import Geocode from "react-geocode";
 
 
 const GetBusinessDetail = () => {
-    console.log("at the top of the component")
+
     const dispatch = useDispatch();
     const history = useHistory();
     const {businessId} = useParams();
@@ -54,7 +54,6 @@ const GetBusinessDetail = () => {
         fetch('/api/businesses/googleAPIKey').then( async (response) => {
             const data = await response.json()
             setAPIKey(data["googleApiKey"])
-
         })
 
     }, [dispatch, businessId])

@@ -5,6 +5,7 @@ const EDIT_BUSINESS = 'business/EDIT_BUSINESS'
 const DELETE_BUSINESS = 'business/DELETE_BUSINESS'
 const SEARCH_BUSINESS = 'business/SEARCH_BUSINESS'
 
+
 const getAllBusinesses = (businesses) => {
     return {
         type: GET_ALL_BUSINESSES,
@@ -46,6 +47,8 @@ const searchBusiness = (businesses) => {
         businesses
     }
 }
+
+
 
 export const getAllBusinessesThunk = () => async (dispatch) => {
     const response = await fetch('/api/businesses/');
@@ -162,6 +165,7 @@ export default function reducer(state = initialState, action) {
             newState = action.businesses
             return newState
         }
+
 
       default:
         return state;
