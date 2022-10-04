@@ -6,7 +6,7 @@ const DELETE_BUSINESS = 'business/DELETE_BUSINESS'
 const SEARCH_BUSINESS = 'business/SEARCH_BUSINESS'
 
 
-const getAllBusinesses = (businesses) => {
+export const getAllBusinesses = (businesses) => {
     return {
         type: GET_ALL_BUSINESSES,
         businesses

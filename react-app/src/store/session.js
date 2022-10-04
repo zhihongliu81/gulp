@@ -1,7 +1,10 @@
+import { getAllBusinesses } from "./business";
+import { getAllReviews } from "./review";
+
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
-const GET_PROFILE = 'session/GET_PROFILE';
+// const GET_PROFILE = 'session/GET_PROFILE';
 
 const setUser = (user) => ({
   type: SET_USER,
@@ -12,13 +15,13 @@ const removeUser = () => ({
   type: REMOVE_USER,
 })
 
-const getProfile = (businesses, reviews) => {
-  return {
-    type: GET_PROFILE,
-    businesses,
-    reviews
-  }
-}
+// const getProfile = (businesses, reviews) => {
+//   return {
+//     type: GET_PROFILE,
+//     businesses,
+//     reviews
+//   }
+// }
 
 
 export const authenticate = () => async (dispatch) => {
@@ -113,7 +116,9 @@ export const getProfileThunk = (userId) => async (dispatch) => {
       if (data.errors) {
         return;
       }
-      dispatch(getProfile(data.businesses, data.reviews));
+      // dispatch(getProfile(data.businesses, data.reviews));
+      dispatch(getAllBusinesses(data.businesses));
+      dispatch(getAllReviews(data.reviews));
       return data
     }
   }
@@ -128,11 +133,11 @@ export default function reducer(state = initialState, action) {
       return { user: action.payload }
     case REMOVE_USER:
       return { user: null }
-    case GET_PROFILE:
-      let newState = {...state};
-      newState.businesses = action.businesses;
-      newState.reviews = action.reviews;
-      return newState;
+    // case GET_PROFILE:
+    //   let newState = {...state};
+    //   newState.businesses = action.businesses;
+    //   newState.reviews = action.reviews;
+    //   return newState;
     default:
       return state;
   }

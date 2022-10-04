@@ -158,7 +158,6 @@ const GetBusinessDetail = () => {
                             <h2>{business.name}</h2>
                             <p>{priceRange}</p>
                         </div >
-                        {/* <Rating initialValue={averRating} allowHalfIcon={true} readonly={true} /> */}
                         <div className='business-detail-busi-review'>
                             {[1, 2, 3, 4, 5].map(ele => {
                                 return (
@@ -177,8 +176,6 @@ const GetBusinessDetail = () => {
                                 <button onClick={handleDeleteBusiness}>Delete</button>
                             </div>
                         }
-
-
                     </div>
                     {user && user.id !== business.userId && <button className='business-detail-review-button' onClick={() => { setShowReviewModal(true); setAction('create') }}>Write a Review</button>}
                     <>
@@ -233,9 +230,7 @@ const GetBusinessDetail = () => {
                                                             <button className='business-detail-review-edit-button' onClick={() => { setShowReviewModal(true); setAction('edit'); setReviewId(review.id); setCurrentReview(review) }}>Edit Review</button>
                                                             <button className='business-detail-review-delete-button' onClick={() => { handleDeleteReview(review.id) }}>Delete</button>
                                                         </div>
-
                                                     }
-                                                    {/* <Rating initialValue={review.rating} allowHalfIcon={true} readonly={true} /> */}
                                                     <div className='business-detail-review-rating-container'>
                                                         {[1, 2, 3, 4, 5].map(ele => {
                                                             return (
