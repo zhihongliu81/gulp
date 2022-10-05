@@ -247,8 +247,10 @@ def update_review(business_id, review_id):
         review.rating = form.data['rating']
         review.content = form.data['content']
         db.session.commit()
+        res = review.to_dict()
+        res['business'] = business.to_dict()
 
-        return review.to_dict()
+        return res
     return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 
