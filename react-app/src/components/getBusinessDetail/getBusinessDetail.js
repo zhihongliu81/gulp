@@ -13,12 +13,12 @@ import ReviewForm from './reviewForm';
 import { Modal } from '../../context/Modal';
 import ratingStarFilled from '../../images/rating-star-filled-1.png';
 import ratingStarEmpty from '../../images/rating-star-empty-1.png';
-import { GoogleMap, useJsApiLoader, Marker, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 import Geocode from "react-geocode";
 
 
 const GetBusinessDetail = () => {
-    console.log("at the top of the component")
+
     const dispatch = useDispatch();
     const history = useHistory();
     const {businessId} = useParams();
@@ -31,6 +31,8 @@ const GetBusinessDetail = () => {
     const [reviewsIsLoaded, setReviewsIsLoaded] = useState(false);
     const [imagesIsLoaded, setImagesIsLoaded] = useState(false);
     const [showReviewModal, setShowReviewModal] = useState(false);
+    const [showDeleteBusinessModal, setShowDeleteBusinessModal] = useState(false);
+    const [showDeleteReviewModal, setShowDeleteReviewModal] = useState(false);
     const [action, setAction] = useState('');
     const [reviewId, setReviewId] = useState('');
     const [currentReview, setCurrentReview] = useState({});
@@ -54,7 +56,6 @@ const GetBusinessDetail = () => {
         fetch('/api/businesses/googleAPIKey').then( async (response) => {
             const data = await response.json()
             setAPIKey(data["googleApiKey"])
-
         })
 
     }, [dispatch, businessId])
@@ -119,11 +120,11 @@ const GetBusinessDetail = () => {
 
     const handleDeleteBusiness = async (e) => {
         e.preventDefault();
-        dispatch(deleteBusinessThunk(businessId)).then(() => history.push('/'))
+        dispatch(deleteBusinessThunk(businessId)).then(() => {setShowDeleteBusinessModal(false); history.push('/')})
     }
 
     const handleDeleteReview = (reviewId) => {
-        dispatch(deleteReviewThunk(reviewId))
+        dispatch(deleteReviewThunk(reviewId)).then(() => setShowDeleteReviewModal(false))
     }
 
     const timeFormated = (time) => {
@@ -159,7 +160,6 @@ const GetBusinessDetail = () => {
                             <h2>{business.name}</h2>
                             <p>{priceRange}</p>
                         </div >
-                        {/* <Rating initialValue={averRating} allowHalfIcon={true} readonly={true} /> */}
                         <div className='business-detail-busi-review'>
                             {[1, 2, 3, 4, 5].map(ele => {
                                 return (
@@ -175,11 +175,21 @@ const GetBusinessDetail = () => {
                         {user && user.id === business.userId &&
                             <div className='business-detail-busi-buttons'>
                                 <NavLink to={`/businesses/${businessId}/edit`}>Edit</NavLink>
-                                <button onClick={handleDeleteBusiness}>Delete</button>
+                                <button onClick={() => setShowDeleteBusinessModal(true)}>Delete</button>
+                                {showDeleteBusinessModal &&
+                                    <Modal onClose={() => setShowDeleteBusinessModal(false) }>
+                                        <div className='delete-modal-container'>
+                                        <h2>Are you sure you would like to delete this business?</h2>
+                                                    <div>
+                                                        <button className='delete-modal-button' onClick={handleDeleteBusiness}>Delete</button>
+                                                        <button className='delete-modal-button' onClick={() => setShowDeleteBusinessModal(false)}>Cancle</button>
+                                                    </div>
+
+                                        </div>
+                                    </Modal>
+                                }
                             </div>
                         }
-
-
                     </div>
                     {user && user.id !== business.userId && <button className='business-detail-review-button' onClick={() => { setShowReviewModal(true); setAction('create') }}>Write a Review</button>}
                     <>
@@ -232,11 +242,9 @@ const GetBusinessDetail = () => {
                                                     {user && review.userId === user.id &&
                                                         <div className='business-detail-review-buttons'>
                                                             <button className='business-detail-review-edit-button' onClick={() => { setShowReviewModal(true); setAction('edit'); setReviewId(review.id); setCurrentReview(review) }}>Edit Review</button>
-                                                            <button className='business-detail-review-delete-button' onClick={() => { handleDeleteReview(review.id) }}>Delete</button>
+                                                            <button className='business-detail-review-delete-button' onClick={() => { setReviewId(review.id); setCurrentReview(review); setShowDeleteReviewModal(true) }}>Delete</button>
                                                         </div>
-
                                                     }
-                                                    {/* <Rating initialValue={review.rating} allowHalfIcon={true} readonly={true} /> */}
                                                     <div className='business-detail-review-rating-container'>
                                                         {[1, 2, 3, 4, 5].map(ele => {
                                                             return (
@@ -254,6 +262,17 @@ const GetBusinessDetail = () => {
                                                 </div>
                                             )
                                         })
+                                        }
+                                        {showDeleteReviewModal &&
+                                            <Modal onClose={() => setShowDeleteReviewModal(false)}>
+                                                <div className='delete-modal-container'>
+                                                    <h2>Are you sure you would like to delete this review?</h2>
+                                                    <div>
+                                                        <button className='delete-modal-button' onClick={() => { handleDeleteReview(reviewId) }}>Delete</button>
+                                                        <button className='delete-modal-button' onClick={() => setShowDeleteReviewModal(false)}>Cancle</button>
+                                                    </div>
+                                                </div>
+                                            </Modal>
                                         }
 
                                     </div>

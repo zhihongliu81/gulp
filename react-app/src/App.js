@@ -54,6 +54,10 @@ function App() {
               <GetUserProfile />
             </Route>
 
+            <Route path={'/user/businesses'} exact={true}>
+              <GetUserProfile />
+            </Route>
+
             <Route path='/' exact={true} >
               <GetAllBusinesses />
             </Route>

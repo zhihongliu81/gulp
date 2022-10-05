@@ -3,7 +3,7 @@ const CREATE_REVIEW = 'review/CREATE_REVIEW'
 const UPDATE_REVIEW = 'review/UPDATE_REVIEW'
 const DELETE_REVIEW = 'review/DELETE_REVIEW'
 
-const getAllReviews = (reviews) => {
+export const getAllReviews = (reviews) => {
     return {
         type: GET_ALL_REVIEWS,
         reviews
