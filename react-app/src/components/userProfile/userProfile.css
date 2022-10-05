@@ -161,7 +161,7 @@
     margin-right: 0.5rem;
 }
 
-.delete-business-modal {
+.delete-modal-container {
     padding: 2rem;
     background-color: antiquewhite;
     width: 40vw;
@@ -170,27 +170,22 @@
     align-items: center;
 }
 
-.delete-business-modal > h2 {
+.delete-modal-container > h2 {
     font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
     overflow-wrap: break-word;
 }
 
-.delete-business-modal-delete-button {
+.delete-modal-button {
     margin-right: 1rem;
     font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
-    background-color: red;
+    font-weight: 600;
+    color: white;
+    background-color: #D32323;
     border-radius: 4px;
     height: 2rem;
     width: 5rem;
     cursor: pointer;
+    border: 0;
 }
 
-.delete-business-modal-cancle-button {
-    margin-right: 1rem;
-    font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
-    background-color: green;
-    border-radius: 4px;
-    height: 2rem;
-    width: 5rem;
-    cursor: pointer;
-}
+

@@ -31,6 +31,8 @@ const GetBusinessDetail = () => {
     const [reviewsIsLoaded, setReviewsIsLoaded] = useState(false);
     const [imagesIsLoaded, setImagesIsLoaded] = useState(false);
     const [showReviewModal, setShowReviewModal] = useState(false);
+    const [showDeleteBusinessModal, setShowDeleteBusinessModal] = useState(false);
+    const [showDeleteReviewModal, setShowDeleteReviewModal] = useState(false);
     const [action, setAction] = useState('');
     const [reviewId, setReviewId] = useState('');
     const [currentReview, setCurrentReview] = useState({});
@@ -118,11 +120,11 @@ const GetBusinessDetail = () => {
 
     const handleDeleteBusiness = async (e) => {
         e.preventDefault();
-        dispatch(deleteBusinessThunk(businessId)).then(() => history.push('/'))
+        dispatch(deleteBusinessThunk(businessId)).then(() => {setShowDeleteBusinessModal(false); history.push('/')})
     }
 
     const handleDeleteReview = (reviewId) => {
-        dispatch(deleteReviewThunk(reviewId))
+        dispatch(deleteReviewThunk(reviewId)).then(() => setShowDeleteReviewModal(false))
     }
 
     const timeFormated = (time) => {
@@ -173,7 +175,19 @@ const GetBusinessDetail = () => {
                         {user && user.id === business.userId &&
                             <div className='business-detail-busi-buttons'>
                                 <NavLink to={`/businesses/${businessId}/edit`}>Edit</NavLink>
-                                <button onClick={handleDeleteBusiness}>Delete</button>
+                                <button onClick={() => setShowDeleteBusinessModal(true)}>Delete</button>
+                                {showDeleteBusinessModal &&
+                                    <Modal onClose={() => setShowDeleteBusinessModal(false) }>
+                                        <div className='delete-modal-container'>
+                                        <h2>Are you sure you would like to delete this business?</h2>
+                                                    <div>
+                                                        <button className='delete-modal-button' onClick={handleDeleteBusiness}>Delete</button>
+                                                        <button className='delete-modal-button' onClick={() => setShowDeleteBusinessModal(false)}>Cancle</button>
+                                                    </div>
+
+                                        </div>
+                                    </Modal>
+                                }
                             </div>
                         }
                     </div>
@@ -228,7 +242,7 @@ const GetBusinessDetail = () => {
                                                     {user && review.userId === user.id &&
                                                         <div className='business-detail-review-buttons'>
                                                             <button className='business-detail-review-edit-button' onClick={() => { setShowReviewModal(true); setAction('edit'); setReviewId(review.id); setCurrentReview(review) }}>Edit Review</button>
-                                                            <button className='business-detail-review-delete-button' onClick={() => { handleDeleteReview(review.id) }}>Delete</button>
+                                                            <button className='business-detail-review-delete-button' onClick={() => { setReviewId(review.id); setCurrentReview(review); setShowDeleteReviewModal(true) }}>Delete</button>
                                                         </div>
                                                     }
                                                     <div className='business-detail-review-rating-container'>
@@ -248,6 +262,17 @@ const GetBusinessDetail = () => {
                                                 </div>
                                             )
                                         })
+                                        }
+                                        {showDeleteReviewModal &&
+                                            <Modal onClose={() => setShowDeleteReviewModal(false)}>
+                                                <div className='delete-modal-container'>
+                                                    <h2>Are you sure you would like to delete this review?</h2>
+                                                    <div>
+                                                        <button className='delete-modal-button' onClick={() => { handleDeleteReview(reviewId) }}>Delete</button>
+                                                        <button className='delete-modal-button' onClick={() => setShowDeleteReviewModal(false)}>Cancle</button>
+                                                    </div>
+                                                </div>
+                                            </Modal>
                                         }
 
                                     </div>
