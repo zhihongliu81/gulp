@@ -20,8 +20,8 @@ const SearchResults = () => {
     // const [center, setCenter] = useState({lat: 29.879444, lng: -97.938889});
     const [isHovering, setIsHovering] = useState(-1);
 
-    const handleMouseOver = (index) => {
-        setIsHovering(index);
+    const handleMouseOver = (businessId) => {
+        setIsHovering(businessId);
     };
 
     const handleMouseOut = () => {
@@ -64,7 +64,6 @@ const SearchResults = () => {
                             alert(`Can not get the lat and lng of this address: ${businessAddress}.`);
                         }
                 }
-                //  dispatch(businessPositions(latLngs));
                 setPositions(latLngs)
 
             }
@@ -105,8 +104,9 @@ const SearchResults = () => {
       };
 
 
-    const defaultCenter = {lat: 29.879444, lng: -97.938889}
-    const locationIds = Object.keys(positions)
+    const defaultCenter = {lat: 29.879444, lng: -97.938889};
+    const locationIds = Object.keys(positions);
+    const businessIndex = {};
 
 
 
@@ -115,8 +115,10 @@ const SearchResults = () => {
             <h2>{total_businesses} {total_businesses === 1 ? 'Result' : 'Results'} Found.</h2>
             <div className='search-result-content-container'>
                 <div className= 'search-result-left-container' >
-                    {businessList.map((business, index) => (
-                        <div key={business.id} id= {isHovering === index ? 'onHover' : ''} className={'search-result-detail-container' } onMouseOver={() => handleMouseOver(index)} onMouseOut={handleMouseOut}>
+                    {businessList.map((business, index) => {
+                        businessIndex[business.id] = index + 1;
+                        return (
+                        <div key={business.id} id= {isHovering === business.id ? 'onHover' : ''} className={'search-result-detail-container' } onMouseOver={() => handleMouseOver(business.id)} onMouseOut={handleMouseOut}>
                             {business.images.length > 0 && <img className='search-result-image' src={business.images[0].url} />}
                             <div className='search-result-detail-right-container'>
                                 <h3 className='search-result-business-name' onClick={() => { history.push(`/businesses/${business.id}`) }}>{index + 1}. {business.name}</h3>
@@ -141,21 +143,19 @@ const SearchResults = () => {
                                 <div className='search-result-business-address'>
                                     {business.address}, {business.city}, {business.state}
                                 </div>
-
-
                             </div>
                         </div>
-                    ))}
+                    )})}
                 </div>
 
                 <div className='search-result-map-container'>
                     {APIKey &&
                         <LoadScript googleMapsApiKey={APIKey}>
-                            <GoogleMap mapContainerStyle={containerStyle} zoom={13} center={locationIds.length > 0 ? positions[locationIds[0]] : defaultCenter}>
+                            <GoogleMap mapContainerStyle={containerStyle} zoom={13} center={locationIds.length > 0 ? positions[isHovering === -1 ? locationIds[0] : isHovering] : defaultCenter}>
 
-                                {locationIds.map((locationId) => (
-                                    <Marker className="google-map-marker" key={positions[locationId].lat + positions[locationId].lng} position={positions[locationId]} label={businesses[locationId]?.name.slice(0, 3)} />
-                                ))}
+                                {locationIds.map((locationId) => {
+                                    return (<Marker icon={Number(locationId)  === isHovering  ? "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2BC032 " : null} className="google-map-marker" key={positions[locationId].lat + positions[locationId].lng} position={positions[locationId]} label={{text: businessIndex[locationId] ? String(businessIndex[locationId]): '', color:'white'}} />
+                                )})}
                             </GoogleMap>
                         </LoadScript>
                     }
