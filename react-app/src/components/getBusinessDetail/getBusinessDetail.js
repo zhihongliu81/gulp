@@ -223,6 +223,7 @@ const GetBusinessDetail = () => {
                                                 mapContainerStyle={containerStyle}
                                                 center={center}
                                                 zoom={10}
+                                                className='business-detail-map'
                                             >
                                                 <>
                                                     <Marker position={center}></Marker>

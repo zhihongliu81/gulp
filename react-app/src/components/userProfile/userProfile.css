@@ -1,5 +1,5 @@
 .profile-main-container {
-    margin-top: 10vh;
+    margin: 10vh auto;
     width: 70vw;
 }
 
@@ -187,5 +187,3 @@
     cursor: pointer;
     border: 0;
 }
-
-
