@@ -38,7 +38,6 @@ const UploadPicture = ({setImages, action}) => {
             document.getElementById("file-upload").value = "";
             setImage(null);
             const newUrls = [...urls]
-            console.log(data.url)
             newUrls.push(data.url)
             setUrls(newUrls)
             setImages(newUrls)
@@ -85,7 +84,7 @@ const UploadPicture = ({setImages, action}) => {
             </>
             <div className="upload-picture-image-container">
                 {urls.map((url) =>
-                <div>
+                <div key={url}>
                     <img className="upload-picture-image" key={url} alt='' src={url} />
                     <button className="upload-picture-button" onClick={() => handleRemove(url)}>Remove</button>
                 </div>

@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%;
 
 }
 
@@ -9,7 +10,7 @@
     position: absolute;
     top:0;
     z-index: -1;
-    width: 100vw;
+    width: 100%;
     height: 35vh;
     object-fit: cover;
 }
@@ -18,14 +19,14 @@
     display: flex;
     flex-direction: row;
     margin-top: 10vh;
+    width: 60%;
 
 }
 
 .business-detail-busi-info-container {
     display: flex;
     flex-direction: column;
-    margin-bottom: 80px;
-    margin-top: 20px;
+    height: 25vh;
 
 }
 
@@ -72,9 +73,11 @@
 
 }
 
+.business-detail-busi-buttons {
+    margin-top: 20px;
+}
 
-.business-detail-busi-buttons :nth-child(2),
-.business-detail-busi-buttons :nth-child(1) {
+.business-detail-busi-buttons > button {
     cursor: pointer;
     font-size: 20px;
     width: 80px;
