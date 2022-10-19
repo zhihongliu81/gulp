@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { getBusinessDetailThunk, deleteBusinessThunk } from '../../store/business';
 import { getAllReviewsThunk, deleteReviewThunk } from '../../store/review';
 import { getAllImagesThunk } from '../../store/image';
@@ -101,12 +101,13 @@ const GetBusinessDetail = () => {
 
     let averRating = 0;
     let totalReviews = Object.keys(reviews).length;
-    let reviewList = []
+    let reviewList = [];
     if (totalReviews > 0) {
         let total = 0;
         Object.values(reviews).forEach(ele => {
             total += ele.rating
             reviewList.push(ele)
+
         })
         averRating = (total / totalReviews).toFixed(1)
     }
@@ -121,6 +122,23 @@ const GetBusinessDetail = () => {
     const handleDeleteBusiness = async (e) => {
         e.preventDefault();
         dispatch(deleteBusinessThunk(businessId)).then(() => {setShowDeleteBusinessModal(false); history.push('/')})
+    }
+
+    const handleCreateReview = () => {
+        let isReviewed = false
+        reviewList.forEach(ele => {
+            if (user && ele.userId === user.id) {
+                isReviewed = true
+                setAction('edit');
+                setReviewId(ele.id);
+                setCurrentReview(ele)
+                        }
+        })
+
+        if (!isReviewed) {
+            setAction('create')
+        }
+        setShowReviewModal(true)
     }
 
     const handleDeleteReview = (reviewId) => {
@@ -152,7 +170,7 @@ const GetBusinessDetail = () => {
 
     return (businessIsLoaded && reviewsIsLoaded && imagesIsLoaded &&
         <div className='business-detail-main-container'>
-            <img className='business-detail-splash-image' alt='business detail splash image' src={imageList[0]} />
+            <img className='business-detail-splash-image' alt='business detail' src={imageList[0]} />
             <div className='business-detail-info-container'>
                 <div>
                     <div className='business-detail-busi-info-container'>
@@ -168,13 +186,12 @@ const GetBusinessDetail = () => {
                                     </div>
                                 )
                             })}
-                            <p>{averRating}</p>
                             <p>{totalReviews} reviews</p>
                         </div>
 
                         {user && user.id === business.userId &&
                             <div className='business-detail-busi-buttons'>
-                                <NavLink to={`/businesses/${businessId}/edit`}>Edit</NavLink>
+                                <button onClick={() => history.push(`/businesses/${businessId}/edit`)}>Edit</button>
                                 <button onClick={() => setShowDeleteBusinessModal(true)}>Delete</button>
                                 {showDeleteBusinessModal &&
                                     <Modal onClose={() => setShowDeleteBusinessModal(false) }>
@@ -191,7 +208,7 @@ const GetBusinessDetail = () => {
                             </div>
                         }
                     </div>
-                    {user && user.id !== business.userId && <button className='business-detail-review-button' onClick={() => { setShowReviewModal(true); setAction('create') }}>Write a Review</button>}
+                    {user && user.id !== business.userId && <button className='business-detail-review-button' onClick={handleCreateReview}>Write a Review</button>}
                     <>
                         {showReviewModal &&
                             <Modal onClose={() => setShowReviewModal(false)}>
@@ -216,7 +233,7 @@ const GetBusinessDetail = () => {
                                     </div>
 
                                 </div>
-                                <div>
+                                <div className='group-detail-google-map'>
                                     {APIKey &&
                                         <LoadScript googleMapsApiKey={APIKey}>
                                             <GoogleMap
@@ -287,8 +304,10 @@ const GetBusinessDetail = () => {
 
                 <div className='business-detail-info-right-container'>
                     <div>
-                        <h3>website</h3>
-                        <p>{business.website}</p>
+                        <h3>Website</h3>
+                        <div className='business-detail-a-link'>
+                            <a href={business.website} rel="noreferrer" target="_blank">{business.website}</a>
+                        </div>
                     </div>
                     <div>
                         <h3>Contact</h3>
@@ -297,8 +316,8 @@ const GetBusinessDetail = () => {
                     </div>
                     <div>
                         <h3>Address</h3>
-                        <p>{business.address} {business.city}, {business.state} {business.zipcode}</p>
-
+                        <p>{business.address} </p>
+                        <p>{business.city}, {business.state} {business.zipcode}</p>
                     </div>
                 </div>
 

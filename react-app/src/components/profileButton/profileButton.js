@@ -1,6 +1,6 @@
 import React, {useState, useRef} from 'react';
 import { useDispatch } from 'react-redux';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import profileIcon from '../../images/profile-icon.png';
 import aboutMeIcon from '../../images/aboutme-icon.png';
 import logoutIcon from '../../images/logout-icon.jpg';

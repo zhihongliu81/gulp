@@ -365,7 +365,7 @@ const BusinessForm = ({business, action}) => {
                         name="minimum price"
                         onChange={e => { setMinPrice(e.target.value); setShowMinPriceErrors(true) }}
                         value={minPrice}
-                        placeholder='number between 0 to 999. Ex: 10.25'
+                        placeholder='number between 0 to 999.99. Ex: 10.25'
                     ></input>
                     <>
                         {showMinPriceErrors && minPriceValidationErrors.map((error, idx) => (
@@ -380,7 +380,7 @@ const BusinessForm = ({business, action}) => {
                         name="maximum price"
                         onChange={e => { setMaxPrice(e.target.value); setShowMaxPriceErrors(true) }}
                         value={maxPrice}
-                        placeholder='number between 0 to 999. Ex: 100.25'
+                        placeholder='number between 0 to 999.99. Ex: 100.25'
                     ></input>
                     <>
                         {showMaxPriceErrors && maxPriceValidationErrors.map((error, idx) => (

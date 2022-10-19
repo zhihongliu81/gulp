@@ -4,6 +4,7 @@
     align-items: center;
     font-family: Helvetica Neue, Avenir, Helvetica, sans-serif;
     width: 100%;
+    padding-bottom: 5vh;
 }
 
 .business-list-splash-image {
@@ -38,7 +39,11 @@
     border: 1px solid rgba(128, 128, 128, 0.3);
     border-radius: 8px;
     width: 600px;
+    cursor: pointer;
+}
 
+.business-list-detail-container:hover {
+    background-color: rgba(250,235,215,0.3);
 }
 
 .business-list-image {
