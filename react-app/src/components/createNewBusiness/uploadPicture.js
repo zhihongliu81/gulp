@@ -35,7 +35,10 @@ const UploadPicture = ({setImages, action}) => {
         if (res.ok) {
             const data = await res.json();
             setImageLoading(false);
+            document.getElementById("file-upload").value = "";
+            setImage(null);
             const newUrls = [...urls]
+            console.log(data.url)
             newUrls.push(data.url)
             setUrls(newUrls)
             setImages(newUrls)

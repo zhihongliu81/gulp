@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import {useDispatch} from "react-redux";
-// import { Rating } from 'react-simple-star-rating';
 import { createReviewThunk, updateReviewThunk } from '../../store/review';
-// import { startTransition } from 'react';
+import { useLocation } from 'react-router-dom';
 import './reviewForm.css';
 import ratingStarFilled from '../../images/rating-star-filled-1.png'
 import ratingStarEmpty from '../../images/rating-star-empty-1.png'
 
 export default function ReviewForm({close,businessId, business, reviewId, action, review}) {
     const dispatch = useDispatch();
+    const path = useLocation();
+    const url = path.pathname;
     const [rating, setRating] = useState(action === 'create'? 0 :(review.rating)); // initial rating value
     const [content, setContent] = useState(action === 'create' ? '' : review.content);
     const [errors, setErrors] = useState([]);
@@ -61,6 +62,7 @@ export default function ReviewForm({close,businessId, business, reviewId, action
                         setErrors(res.errors)
                     }else{
                         close()
+                        document.body.scrollIntoView(false)
                     }
                 }
             )
@@ -72,6 +74,10 @@ export default function ReviewForm({close,businessId, business, reviewId, action
                         setErrors(res.errors)
                     }else{
                         close()
+                        if (url !== '/user/reviews') {
+                            document.body.scrollIntoView(false)
+                        }
+
                     }
                 }
             )

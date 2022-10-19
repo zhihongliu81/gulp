@@ -34,10 +34,10 @@ const GetAllBusinesses = () => {
     }
 
     const images = {
-        0:"https://zhihong-capstone.s3.amazonaws.com/8e57fcc8cd554e77b2b4f123d78a73cf.jpg",
-        1:"https://zhihong-capstone.s3.amazonaws.com/b76e55cffab94b86a451e9891e80d5b1.jpg",
-        2:"https://zhihong-capstone.s3.amazonaws.com/2753747610e24ddd89bebe6052a2659d.jpg",
-        3:"https://zhihong-capstone.s3.amazonaws.com/7a922a742dc040ebaf26387e0c4f70e8.jpg"
+        0:"https://zhihong-capstone.s3.amazonaws.com/8925dbe989814ce39d2fb723b4220fc1.jpg",
+        1:"https://zhihong-capstone.s3.amazonaws.com/65466fd749da4bb28e3369592037043a.jpg",
+        2:"https://zhihong-capstone.s3.amazonaws.com/2ebc0f2379474a8a8aa84f97496e41b9.jpg",
+        3:"https://zhihong-capstone.s3.amazonaws.com/f7be9a61a3e3489b980c3c88bd2faaeb.jpg"
 
     }
 
@@ -47,10 +47,10 @@ const GetAllBusinesses = () => {
             <h2>Your Next Review Awaits</h2>
             <div className='business-list-container'>
                 {businessList.map(business => (
-                    <div key={business.id} className='business-list-detail-container'>
+                    <div key={business.id} className='business-list-detail-container' onClick={() => {history.push(`/businesses/${business.id}`)}}>
                         { business.images.length > 0 && <img alt='business' className='business-list-image' src={business.images[0].url} />}
                         <div className='business-list-detail-right-container'>
-                            <h3 className='business-list-name' onClick={() => {history.push(`/businesses/${business.id}`)}}>{business.name}</h3>
+                            <h3 className='business-list-name' >{business.name}</h3>
                             <p>Do you recommend this business?</p>
                         </div>
                     </div>
