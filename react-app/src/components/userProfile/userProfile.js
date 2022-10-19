@@ -96,7 +96,7 @@ const GetUserProfile = () => {
                 {reviewsList.map(review => (
                     <div key={review.id} className='profile-review-container'>
                         <div className='profile-review-business-container'>
-                            {review.business?.images.length > 0 && <img id='profile-review-business-image' src={review.business.images[0].url} />}
+                            {review.business?.images.length > 0 && <img alt='' id='profile-review-business-image' src={review.business.images[0].url} />}
                             <div className='profile-business-info'>
                                 <h2 onClick={() => { history.push(`/businesses/${review.business.id}`) }}>{review.business.name}</h2>
                                 <div className='profile-business-address'>
@@ -162,7 +162,7 @@ const GetUserProfile = () => {
                 <h2>You have {businessesList.length} {businessesList.length === 1 ? 'business' : 'businesses'}</h2>
                 {businessesList.map(business => (
                     <div key={business.id} className='profile-business-container'>
-                        {business.images.length > 0 && <img className='' src={business.images[0].url} />}
+                        {business.images.length > 0 && <img alt='' className='' src={business.images[0].url} />}
                         <div className='profile-business-info'>
                             <h2 onClick={() => { history.push(`/businesses/${business.id}`) }}>{business.name}</h2>
                             <div className='profile-business-rating-images'>

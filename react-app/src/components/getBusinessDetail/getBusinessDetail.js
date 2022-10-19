@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { NavLink, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { getBusinessDetailThunk, deleteBusinessThunk } from '../../store/business';
 import { getAllReviewsThunk, deleteReviewThunk } from '../../store/review';
 import { getAllImagesThunk } from '../../store/image';
@@ -170,7 +170,7 @@ const GetBusinessDetail = () => {
 
     return (businessIsLoaded && reviewsIsLoaded && imagesIsLoaded &&
         <div className='business-detail-main-container'>
-            <img className='business-detail-splash-image' alt='business detail splash image' src={imageList[0]} />
+            <img className='business-detail-splash-image' alt='business detail' src={imageList[0]} />
             <div className='business-detail-info-container'>
                 <div>
                     <div className='business-detail-busi-info-container'>

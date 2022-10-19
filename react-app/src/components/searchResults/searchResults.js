@@ -119,7 +119,7 @@ const SearchResults = () => {
                         businessIndex[business.id] = index + 1;
                         return (
                         <div key={business.id} id= {isHovering === business.id ? 'onHover' : ''} className={'search-result-detail-container' } onMouseOver={() => handleMouseOver(business.id)} onMouseOut={handleMouseOut}>
-                            {business.images.length > 0 && <img className='search-result-image' src={business.images[0].url} />}
+                            {business.images.length > 0 && <img alt='' className='search-result-image' src={business.images[0].url} />}
                             <div className='search-result-detail-right-container'>
                                 <h3 className='search-result-business-name' onClick={() => { history.push(`/businesses/${business.id}`) }}>{index + 1}. {business.name}</h3>
                                 <div className='search-result-busi-review'>
