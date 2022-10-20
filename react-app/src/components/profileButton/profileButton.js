@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import profileIcon from '../../images/profile-icon.png';
 import aboutMeIcon from '../../images/aboutme-icon.png';
@@ -10,9 +10,12 @@ import { logout } from '../../store/session';
 
 const ProfileButton = () => {
     const dispatch = useDispatch();
-    // const history = useHistory();
+    const user = useSelector(state => state.session.user)
     const dropdownMenu = useRef(null);
     const [showDropdown, setShowDropdown] = useState(false);
+
+
+
     const ToLogout = async (e) => {
         await dispatch(logout());
       };
@@ -29,7 +32,11 @@ const ProfileButton = () => {
 
     return (
         <>
-        <img onClick={() => setShowDropdown(true)} className='profile-button-image' alt='profile icon' src={profileIcon} />
+        <div className='profile-button-container' onClick={() => {setShowDropdown(true)}}>
+        <img  className='profile-button-image' alt='profile icon' src={profileIcon} />
+        <p>{user?.firstName[0].toUpperCase()}</p>
+        </div>
+
         {showDropdown &&
                 <div ref={dropdownMenu} className='profile-button-dropdown-container'>
                     <NavLink onClick={() => setShowDropdown(false)} className={'profile-dropdown-aboutme'} to='/user/reviews' exact={true} activeClassName='active'>
