@@ -96,7 +96,7 @@ const GetUserProfile = () => {
                 {reviewsList.map(review => (
                     <div key={review.id} className='profile-review-container'>
                         <div className='profile-review-business-container'>
-                            {review.business?.images.length > 0 && <img alt='' id='profile-review-business-image' src={review.business.images[0].url} />}
+                            {review.business?.images.length > 0 && <img alt='' className='profile-review-business-image' src={review.business.images[0].url} />}
                             <div className='profile-business-info'>
                                 <h2 onClick={() => { history.push(`/businesses/${review.business.id}`) }}>{review.business.name}</h2>
                                 <div className='profile-business-address'>

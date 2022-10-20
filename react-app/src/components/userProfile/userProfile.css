@@ -21,6 +21,7 @@
     height: 2rem;
     width: 2rem;
     margin-right: 0.5rem;
+    object-fit: cover;
 }
 
 .profile-user-business-review > p {
@@ -110,9 +111,10 @@
     cursor: pointer;
 }
 
-#profile-review-business-image {
+.profile-review-business-image {
     height: 10vh;
     width: 10vh;
+    object-fit: cover;
 }
 
 .profile-review-container {
