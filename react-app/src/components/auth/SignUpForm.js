@@ -104,7 +104,7 @@ const SignUpForm = () => {
   return (
     <div className='signup-form-main-container'>
       <div className='signup-form-left-container'>
-        <h2>Sign Up for Yelp</h2>
+        <h2>Sign Up for Gulp</h2>
         <p>Connect with great local businesses</p>
       <form onSubmit={onSignUp} className='signup-form-form-container'>
         <ul>
@@ -189,7 +189,7 @@ const SignUpForm = () => {
         <button disabled={!readyToSubmit} className={readyToSubmit ? "signup-form-button" : "not-ready-to-signup"} type='submit'>Sign Up</button>
       </form>
       <div className='signup-form-bottom-link'>
-          <p>Already on Yelp?</p>
+          <p>Already on Gulp?</p>
           <NavLink to='/login' className={'signup-form-bottom-navlink'}><p>Log in</p></NavLink>
 
         </div>

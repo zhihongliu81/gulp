@@ -120,8 +120,6 @@ const SearchBar = () => {
                     placeholder='Austin, TX'
                 ></input>
             </div>
-
-            {/* <button className='search-bar-button' onClick={handleSearch}>search</button> */}
             <img className='search-bar-icon' alt='search icon' src={searchIcon} onClick={handleSearch} />
         </div>
     )

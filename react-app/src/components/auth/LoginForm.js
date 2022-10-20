@@ -73,9 +73,9 @@ const LoginForm = () => {
   return (
     <div className='login-form-container'>
       <div className='login-form-left-container'>
-        <h2>Log in to Yelp</h2>
+        <h2>Log in Gulp</h2>
         <div className='login-form-signup'>
-          <p>New to Yelp?</p>
+          <p>New to Gulp?</p>
           <NavLink to='/sign-up' className={'login-form-signup-link'}><p>Sign up</p></NavLink>
         </div>
         <form onSubmit={onLogin} className='login-form-form-container'>
@@ -114,10 +114,10 @@ const LoginForm = () => {
           </div>
 
           <button disabled={!readyToSubmit} className={readyToSubmit ? "login-form-button" : "not-ready-to-login"} type='submit'>Login</button>
-          <button type='button' onClick={handleDemo} className='login-form-demo'>Demo</button>
+          <button type='button' onClick={handleDemo} className='login-form-demo'>Demo Login</button>
         </form>
         <div className='login-form-bottom-link'>
-          <p>New to Yelp?</p>
+          <p>New to Gulp?</p>
           <NavLink to='/sign-up' className={'login-form-bottom-navlink'}><p>Sign up</p></NavLink>
 
         </div>
